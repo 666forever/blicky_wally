@@ -231,19 +231,19 @@
 </head>
 <body>
     <div class="header">
-        <h1>Blicky Bless Me, Chapo, Draco Bless Me</h1>
+        <h1>Blicky bless me, Chapo, Draco bless me</h1>
         <div class="filters">
             <label class="filter-label" for="categoryFilter">Filter:</label>
             <select class="filter-dropdown" id="categoryFilter">
                 <option value="all">All Categories</option>
                 <option value="anime">Anime</option>
-                <option value="nature">Nature</option>
-                <option value="space">Space</option>
+                <option value="dark">Dark / Goth</option>
                 <option value="minimal">Minimal</option>
-                <option value="pixel">Pixel Art</option>
-                <option value="dark">Dark/Nord</option>
-                <option value="abstract">Abstract</option>
-                <option value="urban">Urban</option>
+                <option value="dreamy">Dreamy / Ethereal</option>
+                <option value="gradient">Gradient / Iridescent</option>
+                <option value="floral">Floral</option>
+                <option value="chaotic">Chaotic / Bright</option>
+                <option value="shapes">Shapes / Modern</option>
             </select>
         </div>
         <div class="count" id="count"></div>
@@ -253,321 +253,950 @@
 
     <script>
         const imageData = {
-            "arch_purple.png": ["minimal", "dark"],
-            "astronaut.jpg": ["space"],
-            "alfa.png": ["minimal", "abstract"],
-            "arch-chan_to.png": ["anime", "dark"],
-            "beautiful.jpg": ["nature"],
-            "black.jpg": ["dark", "minimal"],
-            "arch-peace.png": ["minimal"],
-            "black-white-girl.png": ["anime", "minimal"],
-            "bunny.png": ["minimal"],
-            "chinese.png": ["minimal", "abstract"],
-            "colorful-planets.jpg": ["space"],
-            "catppuccin-rainbow-arch.png": ["minimal"],
-            "colors.jpg": ["abstract"],
-            "cron.png": ["minimal", "dark"],
-            "ocean_with_cloud.png": ["nature"],
-            "classic-arch.png": ["minimal"],
-            "cute-town-dark.png": ["urban", "dark"],
-            "cute-town.png": ["urban"],
-            "debian.png": ["dark", "minimal"],
-            "forest.png": ["nature"],
-            "fox.png": ["anime"],
-            "fantasy-woods.jpg": ["nature"],
-            "girl.jpg": ["anime", "urban"],
-            "girl-on-black.png": ["anime", "minimal"],
-            "orbit.png": ["space", "dark"],
-            "gray-background.png": ["abstract", "minimal"],
-            "hands.jpg": ["minimal", "dark"],
-            "hill-house.png": ["nature"],
-            "light-ring.jpg": ["abstract"],
-            "taza.png": ["minimal"],
-            "hello-worlds.png": ["minimal"],
-            "home127-dark.jpg": ["minimal", "dark"],
-            "home127-light.jpg": ["minimal"],
-            "4k-keyboard.jpg": ["minimal"],
-            "python-dev.png": ["minimal", "dark"],
-            "tree-house.png": ["nature"],
-            "trigonometry.png": ["minimal", "abstract"],
-            "wallpaper3-dark.png": ["abstract", "dark"],
-            "36592_serial_experiments_lain.png": ["anime"],
-            "yellow_kyoto.jpg": ["urban", "nature"],
-            "ign_colorful.png": ["abstract"],
-            "earth.png": ["space"],
-            "fire-skull.jpg": ["dark"],
-            "fractal.png": ["abstract", "dark"],
-            "camp_day.png": ["nature", "minimal"],
-            "3squares.png": ["minimal", "abstract"],
-            "japan.png": ["anime", "nature"],
-            "japan2.jpg": ["anime"],
-            "pink-katana.png": ["anime", "minimal"],
-            "jupiter.png": ["space", "dark"],
-            "japan3.jpg": ["nature"],
-            "katana.jpg": ["anime"],
-            "neon-shacks-nord.png": ["urban", "dark"],
-            "knight.png": ["pixel", "dark"],
-            "landscape2.jpg": ["nature"],
-            "lightning.jpg": ["nature", "minimal"],
-            "literal-wallpaper.png": ["minimal", "dark"],
-            "acrylic.jpg": ["abstract"],
-            "blue_demon.png": ["anime", "dark"],
-            "lofi.jpg": ["anime", "urban"],
-            "manga.png": ["anime", "nature"],
-            "cyberpunk_car.png": ["urban", "dark"],
-            "grey_red_tree.png": ["nature", "minimal"],
-            "minimal_nord_guy.png": ["minimal", "dark"],
-            "nord_dark_city.png": ["urban", "dark"],
-            "nord_minimal_cat.png": ["minimal", "dark"],
-            "minim.jpg": ["minimal", "dark"],
-            "minimal_landscape.jpg": ["nature", "minimal"],
-            "moon.png": ["space", "minimal"],
-            "mountains.png": ["nature", "abstract"],
-            "minimal-purple.jpg": ["minimal", "dark"],
-            "art-lake.png": ["nature"],
-            "australia.jpg": ["nature"],
-            "bici.jpg": ["nature"],
-            "shiny-colors.png": ["abstract"],
-            "purple-girl.png": ["anime"],
-            "nix.png": ["minimal", "dark"],
-            "manga-samurai.png": ["anime", "dark"],
-            "TokyoSimplistic.jpg": ["urban", "minimal"],
-            "ign_megumin_dark.png": ["anime", "dark"],
-            "interstellar_wallpaper.png": ["space"],
-            "nord_minimal_girl.png": ["anime", "minimal", "dark"],
-            "nord_purple_waves.png": ["abstract", "dark"],
-            "wallhaven-76d5xv.png": ["nature"],
-            "wallpaper_nord_1.png": ["pixel", "dark"],
-            "pixiv_73483903.png": ["anime"],
-            "man-colors.jpg": ["abstract"],
-            "naruto.png": ["anime", "dark"],
-            "naruto_2.png": ["anime", "dark"],
-            "nature.jpg": ["nature"],
-            "neocity.png": ["urban"],
-            "neocity2.jpg": ["urban", "dark"],
-            "neosamurai.webp": ["anime", "urban"],
-            "nordic.png": ["minimal", "abstract"],
-            "nord-street.png": ["urban", "dark"],
-            "onepiece.png": ["anime"],
-            "wallhaven-j8ym1p.png": ["pixel", "anime"],
-            "wallhaven-nmr788.jpg": ["pixel"],
-            "python-minim.png": ["minimal"],
-            "wallhaven-rrpvd7.png": ["space"],
-            "autumn_leaves.jpg": ["nature"],
-            "berserkdrac.png": ["anime", "dark"],
-            "pastel-city.png": ["urban"],
-            "pastel-car.png": ["urban"],
-            "pastel-window.png": ["anime", "urban"],
-            "pixelart_landscape.jpg": ["pixel", "nature"],
-            "pixel-earth.png": ["space", "pixel", "minimal"],
-            "pixel-city.png": ["pixel", "urban"],
-            "planets.png": ["space"],
-            "platforms.png": ["abstract"],
-            "puppy.jpg": ["nature", "minimal"],
-            "beach_landscape.png": ["nature"],
-            "minimal_gradient.png": ["minimal", "abstract"],
-            "nord_mask.png": ["minimal", "dark"],
-            "pixel_art_beach.jpeg": ["pixel", "nature"],
-            "pixelart_pagoda.jpg": ["pixel", "urban"],
-            "rad_samurai.jpg": ["anime"],
-            "red-forest.jpg": ["nature"],
-            "shougan_castle.png": ["urban", "nature"],
-            "s4vitar.png": ["minimal", "dark"],
-            "s4vitar_old.png": ["minimal", "dark"],
-            "bmw.jpg": ["urban"],
-            "green-girl.jpg": ["anime"],
-            "gruvbox_forest-4.png": ["nature"],
-            "gruvbox_retrocity.png": ["pixel", "urban"],
-            "gruvbox_room.png": ["urban"],
-            "gruvbox_witcher.png": ["anime"],
-            "japan-purple-blur.png": ["urban", "nature"],
-            "catpuccin_w.png": ["anime", "minimal"],
-            "rick.jpg": ["anime", "dark"],
-            "egypt.png": ["dark", "minimal"],
-            "horror_cult.jpg": ["dark"],
-            "river.png": ["nature"],
-            "rm-rf.jpg": ["minimal", "dark"],
-            "robot.jpg": ["space"],
-            "rocket.png": ["space", "abstract"],
-            "room.jpg": ["urban"],
-            "room2.jpg": ["urban", "dark"],
-            "routine.jpg": ["minimal", "dark"],
-            "shibainu.jpeg": ["anime"],
-            "swirls.png": ["abstract", "dark"],
-            "tech.png": ["minimal", "dark"],
-            "town.jpg": ["pixel", "urban"],
-            "two-astronauts.png": ["space", "dark"],
-            "trees.png": ["nature"],
-            "yellow-robot.png": ["minimal", "dark"],
-            "em-rofi.webp": ["urban"],
-            "gas-station.jpg": ["urban"],
-            "glasses.png": ["minimal"],
-            "gradient-pb.png": ["abstract"],
-            "pacman-black.png": ["minimal", "dark"],
-            "plant.png": ["nature", "minimal"],
-            "wallhaven-z8pdqo.jpg": ["abstract", "minimal"],
-            "blue-waves.png": ["abstract"],
-            "pink-clouds.png": ["nature"],
-            "purple-mountain.png": ["nature"],
-            "elon-musk.png": ["minimal", "dark"],
-            "purple-car.jpg": ["urban"],
-            "nord-winter.png": ["nature", "dark"],
-            "nord-shanghai.png": ["urban", "dark"],
-            "color-waves.png": ["abstract"],
-            "arch-eagle.png": ["minimal", "dark"],
-            "blue-black-girl.png": ["anime"],
-            "nasa1.png": ["space", "minimal"],
-            "orange-planets.png": ["space"],
-            "pastel-japanese-temple.png": ["urban", "nature"],
-            "underwater.png": ["nature", "dark"],
-            "vader.png": ["dark"],
-            "van.png": ["urban"],
-            "venom.jpg": ["dark"],
-            "win-11.png": ["minimal", "dark"],
-            "anime-eye-nord.png": ["anime", "minimal"],
-            "black_car_girl.jpg": ["anime", "urban"],
-            "dark_skulls.png": ["dark"],
-            "lofi_cat.png": ["anime"],
-            "purple_car_girl.png": ["anime", "urban"],
-            "wallhaven-0qrgwr.png": ["space"],
-            "japan_torii.png": ["urban", "nature"],
-            "sunset-xfksfuywx.png": ["nature"],
-            "tree-nature-castleinsky.png": ["nature"],
-            "wallhaven-x67oxo.png": ["nature"],
-            "waterfall.gif": ["nature"],
-            "astronaut-nord.png": ["space", "dark"],
-            "deer-red-moon.png": ["nature"],
-            "japanese-house.png": ["urban", "nature"],
-            "pink-mecha.png": ["anime"],
-            "wallhaven.png": ["minimal", "dark"],
-            "wallhaven-28rjj6.png": ["urban"],
-            "nord_dots.png": ["abstract", "dark"],
-            "circuits.png": ["minimal", "dark"],
-            "abandoned.jpg": ["urban", "dark"],
-            "abstract.jpg": ["abstract"],
-            "anime-chick.jpg": ["anime"],
-            "astronaut-balloons.jpg": ["space"],
-            "astronaut-planet.jpg": ["space"],
-            "california.jpg": ["nature"],
-            "cat_anime-girl.png": ["anime"],
-            "catpuccin_samurai.png": ["anime"],
-            "cool_rocks.png": ["nature"],
-            "dark_forest.png": ["nature", "dark"],
-            "pixel_big_city.png": ["pixel", "urban"],
-            "anime-nord.png": ["anime", "dark"],
-            "anime-pond.png": ["anime", "nature"],
-            "golden-mountains.png": ["nature", "minimal"],
-            "lets_go_home.png": ["anime", "urban"],
-            "shiny_purple.png": ["abstract"],
-            "steampunk_portal.png": ["urban"],
-            "towashi.jpg": ["urban", "dark"],
-            "waves_dracula_flipped.png": ["abstract", "dark"],
-            "sunset_city.png": ["urban", "nature"],
-            "aurora_v02.png": ["nature", "abstract"],
-            "got_bw.jpg": ["anime", "minimal"],
-            "got_red.jpg": ["anime"],
-            "nord-chainsaw.png": ["dark"],
-            "nord-princess-zelda.jpg": ["anime", "dark"],
-            "pacman-nord.png": ["minimal", "dark"],
-            "pixelart-colors.png": ["pixel", "abstract"],
-            "virus-nord.png": ["minimal", "dark"],
-            "astronaut-rocket.jpg": ["space"],
-            "black-panther.jpg": ["dark"],
-            "cat.jpg": ["minimal"],
-            "cliff-edge.jpg": ["nature"],
-            "coffee.jpg": ["minimal", "dark"],
-            "deer-forest.jpg": ["nature"],
-            "demon.jpg": ["dark"],
-            "forest-bridge.jpg": ["nature"],
-            "anime_cafe_tokyonight.png": ["anime", "urban"],
-            "anime_skyline.png": ["anime", "urban"],
-            "goldfish.jpg": ["minimal", "dark"],
-            "green-sun.jpg": ["nature"],
-            "lake.jpg": ["nature"],
-            "leave-planet.jpg": ["space", "dark"],
-            "holy-arch-nordic.png": ["minimal", "dark"],
-            "needing-space.jpg": ["space", "dark"],
-            "neon-lights.jpg": ["urban"],
-            "odysee.jpg": ["nature"],
-            "orange-cube.jpg": ["abstract"],
-            "saturn-rings.jpg": ["space", "nature"],
-            "staircase.jpg": ["urban"],
-            "wallhaven-9mjw78.png": ["nature"],
-            "wallhaven-q21vkl.jpg": ["nature"],
-            "anime-water.png": ["anime"],
-            "blue-red-4k.png": ["abstract"],
-            "minim-helmet.png": ["minimal", "dark"],
-            "neon-car2.png": ["urban"],
-            "4k-ai-mountain.jpg": ["nature"],
-            "estrategy-minimal.png": ["minimal", "dark"],
-            "nord-shards.jpg": ["abstract", "dark"],
-            "plain-wallpaper.png": ["minimal"],
-            "wano_vector.png": ["minimal"],
-            "windmill.jpg": ["nature"],
-            "you-got-this.jpg": ["minimal", "dark"],
-            "cabin.png": ["nature"],
-            "ink_wave.png": ["abstract", "minimal"],
-            "lofi-cafe_gray.jpg": ["urban", "minimal"],
-            "minim_blocks.png": ["minimal", "abstract"],
-            "pixelart_forest.jpg": ["pixel", "nature"],
-            "shape-abstract.jpg": ["abstract"],
-            "smooth_blue.png": ["abstract"],
-            "smooth_pink.png": ["abstract"],
-            "Doodle_Space_Nord.png": ["space", "dark"],
-            "japan_anime_city.jpg": ["anime", "urban"],
-            "mecha-nostalgia.png": ["anime"],
-            "plane_sunset.png": ["nature"],
-            "planet_minimal.png": ["space", "minimal"],
-            "train_and_lake.png": ["nature"],
-            "white_yinyang.jpg": ["minimal"],
-            "awesome.png": ["abstract"],
-            "my-neighbor-totoro-sunflowers.png": ["anime", "nature"],
-            "gruvbox_code.png": ["minimal", "dark"],
-            "catpuccin_landscape.png": ["nature"],
-            "guy_sleeping_colored.png": ["pixel", "anime"],
-            "mocha_steampunk.jpg": ["urban"],
-            "mushroom-purple.png": ["nature"],
-            "oled-mountains.jpg": ["nature", "minimal"],
-            "purple-bomb.png": ["minimal"],
-            "purple-crystal.png": ["abstract"],
-            "alien_planet.jpeg": ["space"],
-            "dopesmoker_gruvbox.png": ["abstract"],
-            "polar_catppuccin.png": ["nature"],
-            "sushi_dark.png": ["minimal", "dark"],
-            "lana_silhouette.png": ["minimal", "dark"],
-            "wave_black.png": ["abstract", "minimal"],
-            "flower_tokyo.png": ["nature"],
-            "tiger-gray.jpg": ["minimal"],
-            "skyline.png": ["urban"],
-            "falltree.jpg": ["nature"],
-            "field.jpeg": ["nature"],
-            "rick-tokyonight.png": ["anime", "dark"],
-            "wallhaven-e7m8zl.jpg": ["nature"],
-            "wallhaven-lmxwdl.jpg": ["nature"],
-            "beige_tree.png": ["nature", "minimal"],
-            "dark_pixelart.png": ["pixel", "dark"],
-            "haskell.png": ["minimal"],
-            "ibmbios8x8_intel.png": ["minimal"],
-            "minimal_c.png": ["minimal"],
-            "minimal_python.png": ["minimal"],
-            "purple_plane_landscape.png": ["nature"],
-            "uj21s0by4v271.jpg": ["nature"],
-            "planet_with_sunrise.png": ["space"],
-            "fishing_stars.jpg": ["nature"],
-            "kiryu_black.png": ["anime", "minimal"],
-            "one-piece-luffy.jpg": ["anime"],
-            "pond_shed.png": ["nature"],
-            "retro_market.png": ["pixel", "urban"],
-            "weeknd.png": ["urban"],
-            "a_cartoon_of_a_house_on_a_cliff.png": ["nature"],
-            "futuristicAncientTree.png": ["nature"],
-            "apple_gruvbox.jpg": ["minimal"],
-            "house-art.webp": ["nature"],
-            "pixel-waterfall.webp": ["pixel", "nature"],
-            "trad-waves.webp": ["abstract", "nature"]
+  "21-blue-energy-beam-convergence.jpg": [
+    "21-blue-energy-beam-convergence"
+  ],
+  "21-blue-fractal-light-background.jpg": [
+    "21-blue-fractal-light-background"
+  ],
+  "anime (2).jpg": [
+    "anime"
+  ],
+  "anime (3).jpeg": [
+    "anime"
+  ],
+  "anime (3).png": [
+    "anime"
+  ],
+  "anime (5).jpg": [
+    "anime"
+  ],
+  "anime (5).png": [
+    "anime"
+  ],
+  "anime (6).jpg": [
+    "anime"
+  ],
+  "anime (7).jpg": [
+    "anime"
+  ],
+  "anime, aesthetic, ethereal,  (1).jpeg": [
+    "anime",
+    "aesthetic",
+    "ethereal"
+  ],
+  "anime, aesthetic, ethereal,  (1).png": [
+    "anime",
+    "aesthetic",
+    "ethereal"
+  ],
+  "anime, aesthetic, ethereal,  (2).jpeg": [
+    "anime",
+    "aesthetic",
+    "ethereal"
+  ],
+  "anime, aesthetic, ethereal,  (2).png": [
+    "anime",
+    "aesthetic",
+    "ethereal"
+  ],
+  "anime, aesthetic, ethereal,  (3).png": [
+    "anime",
+    "aesthetic",
+    "ethereal"
+  ],
+  "anime, dark, (6).jpeg": [
+    "anime",
+    "dark"
+  ],
+  "anime, dark, aesthetic,  (1).jpeg": [
+    "anime",
+    "dark",
+    "aesthetic"
+  ],
+  "anime, dark, aesthetic,  (1).png": [
+    "anime",
+    "dark",
+    "aesthetic"
+  ],
+  "anime, dark, aesthetic,  (2).jpg": [
+    "anime",
+    "dark",
+    "aesthetic"
+  ],
+  "anime, dark, aesthetic,  (3).jpg": [
+    "anime",
+    "dark",
+    "aesthetic"
+  ],
+  "anime, dark, aesthetic,  (3).png": [
+    "anime",
+    "dark",
+    "aesthetic"
+  ],
+  "anime, dark, aesthetic,  (4).jpg": [
+    "anime",
+    "dark",
+    "aesthetic"
+  ],
+  "anime, dark, aesthetic,  (4).png": [
+    "anime",
+    "dark",
+    "aesthetic"
+  ],
+  "anime, dark, aesthetic,  (5).jpg": [
+    "anime",
+    "dark",
+    "aesthetic"
+  ],
+  "anime, dark, aesthetic,  (5).png": [
+    "anime",
+    "dark",
+    "aesthetic"
+  ],
+  "anime, dark, aesthetic, (8).png": [
+    "anime",
+    "dark",
+    "aesthetic"
+  ],
+  "anime, styled, toned down, (1).jpg": [
+    "anime",
+    "styled",
+    "toned down"
+  ],
+  "anime, styled, toned down, (3).jpg": [
+    "anime",
+    "styled",
+    "toned down"
+  ],
+  "anime, styled, toned down, (4).jpg": [
+    "anime",
+    "styled",
+    "toned down"
+  ],
+  "anime, styled, toned down, (5).jpg": [
+    "anime",
+    "styled",
+    "toned down"
+  ],
+  "anime, styled, toned down, (6).jpg": [
+    "anime",
+    "styled",
+    "toned down"
+  ],
+  "anime.jpeg": [
+    "anime"
+  ],
+  "anime.jpg": [
+    "anime"
+  ],
+  "anime.png": [
+    "anime"
+  ],
+  "black, dark, minimalistic, goth, (1).jpg": [
+    "black",
+    "dark",
+    "minimalistic",
+    "goth"
+  ],
+  "black, dark, minimalistic, goth, (2).jpg": [
+    "black",
+    "dark",
+    "minimalistic",
+    "goth"
+  ],
+  "black, dark, minimalistic, goth, (3).jpg": [
+    "black",
+    "dark",
+    "minimalistic",
+    "goth"
+  ],
+  "black, dark, minimalistic, goth, (4).jpg": [
+    "black",
+    "dark",
+    "minimalistic",
+    "goth"
+  ],
+  "black, dark, minimalistic, goth, (5).jpg": [
+    "black",
+    "dark",
+    "minimalistic",
+    "goth"
+  ],
+  "black, dark, minimalistic, goth, (6).jpg": [
+    "black",
+    "dark",
+    "minimalistic",
+    "goth"
+  ],
+  "black, dark, minimalistic, goth, (7).jpg": [
+    "black",
+    "dark",
+    "minimalistic",
+    "goth"
+  ],
+  "black, dark, minimalistic, goth, (8).jpg": [
+    "black",
+    "dark",
+    "minimalistic",
+    "goth"
+  ],
+  "black, dark, minimalistic, goth, (9).jpg": [
+    "black",
+    "dark",
+    "minimalistic",
+    "goth"
+  ],
+  "chaotic, soft, toned down,  (1).jpg": [
+    "chaotic",
+    "soft",
+    "toned down"
+  ],
+  "chaotic, soft, toned down,  (2).jpg": [
+    "chaotic",
+    "soft",
+    "toned down"
+  ],
+  "chaotic, soft, toned down,  (3).jpg": [
+    "chaotic",
+    "soft",
+    "toned down"
+  ],
+  "chaotic, soft, toned down,  (4).jpg": [
+    "chaotic",
+    "soft",
+    "toned down"
+  ],
+  "chaotic, soft, toned down,  (5).jpg": [
+    "chaotic",
+    "soft",
+    "toned down"
+  ],
+  "chaotic, soft, toned down,  (6).jpg": [
+    "chaotic",
+    "soft",
+    "toned down"
+  ],
+  "dark, .jpg": [
+    "dark"
+  ],
+  "dark, minimalistic, chaos (1).png": [
+    "dark",
+    "minimalistic",
+    "chaos"
+  ],
+  "dark, minimalistic, chaos (2).png": [
+    "dark",
+    "minimalistic",
+    "chaos"
+  ],
+  "dark, minimalistic, chaos (3).png": [
+    "dark",
+    "minimalistic",
+    "chaos"
+  ],
+  "dark, minimalistic, clean, .jpg": [
+    "dark",
+    "minimalistic",
+    "clean"
+  ],
+  "dreamy, aestethic, ethereal, floral, (1).jpg": [
+    "dreamy",
+    "aestethic",
+    "ethereal",
+    "floral"
+  ],
+  "dreamy, aestethic, ethereal, floral, (2).jpg": [
+    "dreamy",
+    "aestethic",
+    "ethereal",
+    "floral"
+  ],
+  "dreamy, aestethic, ethereal, floral, (3).jpg": [
+    "dreamy",
+    "aestethic",
+    "ethereal",
+    "floral"
+  ],
+  "dreamy, aestethic, ethereal, floral, (4).jpg": [
+    "dreamy",
+    "aestethic",
+    "ethereal",
+    "floral"
+  ],
+  "dreamy, aestethic, ethereal, floral, (5).jpg": [
+    "dreamy",
+    "aestethic",
+    "ethereal",
+    "floral"
+  ],
+  "dreamy, aestethic, ethereal, floral, (6).jpg": [
+    "dreamy",
+    "aestethic",
+    "ethereal",
+    "floral"
+  ],
+  "dreamy, aestethic, ethereal, floral, (7).jpg": [
+    "dreamy",
+    "aestethic",
+    "ethereal",
+    "floral"
+  ],
+  "dreamy, aestethic, ethereal, floral, (8).jpg": [
+    "dreamy",
+    "aestethic",
+    "ethereal",
+    "floral"
+  ],
+  "dreamy, floral, aesthetic, ethereal, soft, smooth, minimalism, (10).jpg": [
+    "dreamy",
+    "floral",
+    "aesthetic",
+    "ethereal",
+    "soft",
+    "smooth",
+    "minimalism"
+  ],
+  "dreamy, floral, aesthetic, ethereal, soft, smooth, minimalism, (11).jpg": [
+    "dreamy",
+    "floral",
+    "aesthetic",
+    "ethereal",
+    "soft",
+    "smooth",
+    "minimalism"
+  ],
+  "dreamy, floral, aesthetic, ethereal, soft, smooth, minimalism, (6).jpg": [
+    "dreamy",
+    "floral",
+    "aesthetic",
+    "ethereal",
+    "soft",
+    "smooth",
+    "minimalism"
+  ],
+  "dreamy, floral, aesthetic, ethereal, soft, smooth, minimalism, (7).jpg": [
+    "dreamy",
+    "floral",
+    "aesthetic",
+    "ethereal",
+    "soft",
+    "smooth",
+    "minimalism"
+  ],
+  "dreamy, floral, aesthetic, ethereal, soft, smooth, minimalism, (8).jpg": [
+    "dreamy",
+    "floral",
+    "aesthetic",
+    "ethereal",
+    "soft",
+    "smooth",
+    "minimalism"
+  ],
+  "dreamy, floral, aesthetic, ethereal, soft, smooth, minimalism, (9).jpg": [
+    "dreamy",
+    "floral",
+    "aesthetic",
+    "ethereal",
+    "soft",
+    "smooth",
+    "minimalism"
+  ],
+  "dreamy, soft tones, aesthetic,  (1).jpg": [
+    "dreamy",
+    "soft tones",
+    "aesthetic"
+  ],
+  "dreamy, soft tones, aesthetic,  (2).jpg": [
+    "dreamy",
+    "soft tones",
+    "aesthetic"
+  ],
+  "dreamy, soft tones, aesthetic,  (3).jpg": [
+    "dreamy",
+    "soft tones",
+    "aesthetic"
+  ],
+  "dreamy, soft tones, aesthetic,  (4).jpg": [
+    "dreamy",
+    "soft tones",
+    "aesthetic"
+  ],
+  "dreamy, soft tones, aesthetic,  (5).jpg": [
+    "dreamy",
+    "soft tones",
+    "aesthetic"
+  ],
+  "dreamy, soft tones, aesthetic,  (6).jpg": [
+    "dreamy",
+    "soft tones",
+    "aesthetic"
+  ],
+  "Dreamy_20Fabrica_20-_2010.jpeg": [
+    "dreamy_20fabrica_20-_2010"
+  ],
+  "fractal glass, gradient, soft, minimalism, clean,  (1).jpg": [
+    "fractal glass",
+    "gradient",
+    "soft",
+    "minimalism",
+    "clean"
+  ],
+  "fractal glass, gradient, soft, minimalism, clean,  (10).jpg": [
+    "fractal glass",
+    "gradient",
+    "soft",
+    "minimalism",
+    "clean"
+  ],
+  "fractal glass, gradient, soft, minimalism, clean,  (11).jpg": [
+    "fractal glass",
+    "gradient",
+    "soft",
+    "minimalism",
+    "clean"
+  ],
+  "fractal glass, gradient, soft, minimalism, clean,  (2).jpg": [
+    "fractal glass",
+    "gradient",
+    "soft",
+    "minimalism",
+    "clean"
+  ],
+  "fractal glass, gradient, soft, minimalism, clean,  (3).jpg": [
+    "fractal glass",
+    "gradient",
+    "soft",
+    "minimalism",
+    "clean"
+  ],
+  "fractal glass, gradient, soft, minimalism, clean,  (4).jpg": [
+    "fractal glass",
+    "gradient",
+    "soft",
+    "minimalism",
+    "clean"
+  ],
+  "fractal glass, gradient, soft, minimalism, clean,  (5).jpg": [
+    "fractal glass",
+    "gradient",
+    "soft",
+    "minimalism",
+    "clean"
+  ],
+  "fractal glass, gradient, soft, minimalism, clean,  (6).jpg": [
+    "fractal glass",
+    "gradient",
+    "soft",
+    "minimalism",
+    "clean"
+  ],
+  "fractal glass, gradient, soft, minimalism, clean,  (7).jpg": [
+    "fractal glass",
+    "gradient",
+    "soft",
+    "minimalism",
+    "clean"
+  ],
+  "fractal glass, gradient, soft, minimalism, clean,  (8).jpg": [
+    "fractal glass",
+    "gradient",
+    "soft",
+    "minimalism",
+    "clean"
+  ],
+  "fractal glass, gradient, soft, minimalism, clean,  (9).jpg": [
+    "fractal glass",
+    "gradient",
+    "soft",
+    "minimalism",
+    "clean"
+  ],
+  "fractal glass, gradient, soft, minimalism, clean, (10).jpg": [
+    "fractal glass",
+    "gradient",
+    "soft",
+    "minimalism",
+    "clean"
+  ],
+  "Galactic_20-_2028.png": [
+    "galactic_20-_2028"
+  ],
+  "gradient, chaotic, bright, (1).jpeg": [
+    "gradient",
+    "chaotic",
+    "bright"
+  ],
+  "gradient, chaotic, bright, (1).jpg": [
+    "gradient",
+    "chaotic",
+    "bright"
+  ],
+  "gradient, chaotic, bright, (2).jpg": [
+    "gradient",
+    "chaotic",
+    "bright"
+  ],
+  "gradient, chaotic, bright, (3).jpg": [
+    "gradient",
+    "chaotic",
+    "bright"
+  ],
+  "gradient, chaotic, bright, (4).jpg": [
+    "gradient",
+    "chaotic",
+    "bright"
+  ],
+  "gradient, pastel, white, iridescent,  (1).jpg": [
+    "gradient",
+    "pastel",
+    "white",
+    "iridescent"
+  ],
+  "gradient, pastel, white, iridescent,  (10).jpg": [
+    "gradient",
+    "pastel",
+    "white",
+    "iridescent"
+  ],
+  "gradient, pastel, white, iridescent,  (11).jpg": [
+    "gradient",
+    "pastel",
+    "white",
+    "iridescent"
+  ],
+  "gradient, pastel, white, iridescent,  (2).jpg": [
+    "gradient",
+    "pastel",
+    "white",
+    "iridescent"
+  ],
+  "gradient, pastel, white, iridescent,  (3).jpg": [
+    "gradient",
+    "pastel",
+    "white",
+    "iridescent"
+  ],
+  "gradient, pastel, white, iridescent,  (4).jpg": [
+    "gradient",
+    "pastel",
+    "white",
+    "iridescent"
+  ],
+  "gradient, pastel, white, iridescent,  (5).jpg": [
+    "gradient",
+    "pastel",
+    "white",
+    "iridescent"
+  ],
+  "gradient, pastel, white, iridescent,  (6).jpg": [
+    "gradient",
+    "pastel",
+    "white",
+    "iridescent"
+  ],
+  "gradient, pastel, white, iridescent,  (7).jpg": [
+    "gradient",
+    "pastel",
+    "white",
+    "iridescent"
+  ],
+  "gradient, pastel, white, iridescent,  (8).jpg": [
+    "gradient",
+    "pastel",
+    "white",
+    "iridescent"
+  ],
+  "gradient, pastel, white, iridescent,  (9).jpg": [
+    "gradient",
+    "pastel",
+    "white",
+    "iridescent"
+  ],
+  "gradient, pastel, white, iridescent, (12).jpg": [
+    "gradient",
+    "pastel",
+    "white",
+    "iridescent"
+  ],
+  "gradient, soft, minimalism, clean,  (1).jpg": [
+    "gradient",
+    "soft",
+    "minimalism",
+    "clean"
+  ],
+  "gradient, soft, minimalism, clean,  (10).jpg": [
+    "gradient",
+    "soft",
+    "minimalism",
+    "clean"
+  ],
+  "gradient, soft, minimalism, clean,  (13).jpg": [
+    "gradient",
+    "soft",
+    "minimalism",
+    "clean"
+  ],
+  "gradient, soft, minimalism, clean,  (2).jpg": [
+    "gradient",
+    "soft",
+    "minimalism",
+    "clean"
+  ],
+  "gradient, soft, minimalism, clean,  (2).png": [
+    "gradient",
+    "soft",
+    "minimalism",
+    "clean"
+  ],
+  "gradient, soft, minimalism, clean,  (3).jpg": [
+    "gradient",
+    "soft",
+    "minimalism",
+    "clean"
+  ],
+  "gradient, soft, minimalism, clean,  (3).png": [
+    "gradient",
+    "soft",
+    "minimalism",
+    "clean"
+  ],
+  "gradient, soft, minimalism, clean,  (4).jpg": [
+    "gradient",
+    "soft",
+    "minimalism",
+    "clean"
+  ],
+  "gradient, soft, minimalism, clean,  (4).png": [
+    "gradient",
+    "soft",
+    "minimalism",
+    "clean"
+  ],
+  "gradient, soft, minimalism, clean,  (5).jpg": [
+    "gradient",
+    "soft",
+    "minimalism",
+    "clean"
+  ],
+  "gradient, soft, minimalism, clean,  (5).png": [
+    "gradient",
+    "soft",
+    "minimalism",
+    "clean"
+  ],
+  "gradient, soft, minimalism, clean,  (6).jpg": [
+    "gradient",
+    "soft",
+    "minimalism",
+    "clean"
+  ],
+  "gradient, soft, minimalism, clean,  (7).jpg": [
+    "gradient",
+    "soft",
+    "minimalism",
+    "clean"
+  ],
+  "gradient, soft, minimalism, clean,  (7).png": [
+    "gradient",
+    "soft",
+    "minimalism",
+    "clean"
+  ],
+  "gradient, soft, minimalism, clean,  (8).jpg": [
+    "gradient",
+    "soft",
+    "minimalism",
+    "clean"
+  ],
+  "gradient, soft, minimalism, clean,  (8).png": [
+    "gradient",
+    "soft",
+    "minimalism",
+    "clean"
+  ],
+  "gradient, soft, minimalism, clean,  (9).jpg": [
+    "gradient",
+    "soft",
+    "minimalism",
+    "clean"
+  ],
+  "gradient, soft, minimalism, clean,  (9).png": [
+    "gradient",
+    "soft",
+    "minimalism",
+    "clean"
+  ],
+  "gradient, soft, minimalism, clean, .jpg": [
+    "gradient",
+    "soft",
+    "minimalism",
+    "clean"
+  ],
+  "iridescent, chaotic, shape,  (2).jpg": [
+    "iridescent",
+    "chaotic",
+    "shape"
+  ],
+  "iridescent, chaotic, shape,  (3).jpg": [
+    "iridescent",
+    "chaotic",
+    "shape"
+  ],
+  "iridescent, chaotic, shape,  (4).jpg": [
+    "iridescent",
+    "chaotic",
+    "shape"
+  ],
+  "iridescent, chaotic, shape, .jpg": [
+    "iridescent",
+    "chaotic",
+    "shape"
+  ],
+  "iridescent, clean, calm,  (1).jpg": [
+    "iridescent",
+    "clean",
+    "calm"
+  ],
+  "iridescent, clean, calm,  (10).jpg": [
+    "iridescent",
+    "clean",
+    "calm"
+  ],
+  "iridescent, clean, calm,  (2).jpg": [
+    "iridescent",
+    "clean",
+    "calm"
+  ],
+  "iridescent, clean, calm,  (3).jpg": [
+    "iridescent",
+    "clean",
+    "calm"
+  ],
+  "iridescent, clean, calm,  (4).jpg": [
+    "iridescent",
+    "clean",
+    "calm"
+  ],
+  "iridescent, clean, calm,  (5).jpg": [
+    "iridescent",
+    "clean",
+    "calm"
+  ],
+  "iridescent, clean, calm,  (6).jpg": [
+    "iridescent",
+    "clean",
+    "calm"
+  ],
+  "iridescent, clean, calm,  (7).jpg": [
+    "iridescent",
+    "clean",
+    "calm"
+  ],
+  "iridescent, clean, calm,  (8).jpg": [
+    "iridescent",
+    "clean",
+    "calm"
+  ],
+  "iridescent, clean, calm,  (9).jpg": [
+    "iridescent",
+    "clean",
+    "calm"
+  ],
+  "iridescent, clean, calm, .jpg": [
+    "iridescent",
+    "clean",
+    "calm"
+  ],
+  "purple, anime, styled, toned down, (2).jpg": [
+    "purple",
+    "anime",
+    "styled",
+    "toned down"
+  ],
+  "purple, anime, styled, toned down, (2).png": [
+    "purple",
+    "anime",
+    "styled",
+    "toned down"
+  ],
+  "purple, anime, styled, toned down, (5).jpg": [
+    "purple",
+    "anime",
+    "styled",
+    "toned down"
+  ],
+  "purple, anime, styled, toned down, (6).jpg": [
+    "purple",
+    "anime",
+    "styled",
+    "toned down"
+  ],
+  "purple, anime, styled, toned down, (7).jpg": [
+    "purple",
+    "anime",
+    "styled",
+    "toned down"
+  ],
+  "purple, styled, toned down, (2).jpg": [
+    "purple",
+    "styled",
+    "toned down"
+  ],
+  "purple, styled, toned down, (2).png": [
+    "purple",
+    "styled",
+    "toned down"
+  ],
+  "purple, styled, toned down, (3).png": [
+    "purple",
+    "styled",
+    "toned down"
+  ],
+  "shape, purple, anime, styled, toned down, (3).jpg": [
+    "shape",
+    "purple",
+    "anime",
+    "styled",
+    "toned down"
+  ],
+  "shape, purple, anime, styled, toned down, (4).jpeg": [
+    "shape",
+    "purple",
+    "anime",
+    "styled",
+    "toned down"
+  ],
+  "shape, purple, anime, styled, toned down, (4).jpg": [
+    "shape",
+    "purple",
+    "anime",
+    "styled",
+    "toned down"
+  ],
+  "shape, purple, anime, styled, toned down, (5).jpg": [
+    "shape",
+    "purple",
+    "anime",
+    "styled",
+    "toned down"
+  ],
+  "shape, smooth, minimalism, modern,  (1).jpeg": [
+    "shape",
+    "smooth",
+    "minimalism",
+    "modern"
+  ],
+  "shape, smooth, minimalism, modern,  (10).jpg": [
+    "shape",
+    "smooth",
+    "minimalism",
+    "modern"
+  ],
+  "shape, smooth, minimalism, modern,  (11).jpeg": [
+    "shape",
+    "smooth",
+    "minimalism",
+    "modern"
+  ],
+  "shape, smooth, minimalism, modern,  (11).jpg": [
+    "shape",
+    "smooth",
+    "minimalism",
+    "modern"
+  ],
+  "shape, smooth, minimalism, modern,  (12).jpeg": [
+    "shape",
+    "smooth",
+    "minimalism",
+    "modern"
+  ],
+  "shape, smooth, minimalism, modern,  (12).jpg": [
+    "shape",
+    "smooth",
+    "minimalism",
+    "modern"
+  ],
+  "shape, smooth, minimalism, modern,  (13).jpg": [
+    "shape",
+    "smooth",
+    "minimalism",
+    "modern"
+  ],
+  "shape, smooth, minimalism, modern,  (14).jpg": [
+    "shape",
+    "smooth",
+    "minimalism",
+    "modern"
+  ],
+  "shape, smooth, minimalism, modern,  (15).jpg": [
+    "shape",
+    "smooth",
+    "minimalism",
+    "modern"
+  ],
+  "shape, smooth, minimalism, modern,  (16).jpeg": [
+    "shape",
+    "smooth",
+    "minimalism",
+    "modern"
+  ],
+  "shape, smooth, minimalism, modern,  (4).jpeg": [
+    "shape",
+    "smooth",
+    "minimalism",
+    "modern"
+  ],
+  "shape, smooth, minimalism, modern,  (5).jpeg": [
+    "shape",
+    "smooth",
+    "minimalism",
+    "modern"
+  ],
+  "shape, smooth, minimalism, modern,  (6).jpeg": [
+    "shape",
+    "smooth",
+    "minimalism",
+    "modern"
+  ],
+  "shape, smooth, minimalism, modern,  (7).jpeg": [
+    "shape",
+    "smooth",
+    "minimalism",
+    "modern"
+  ],
+  "shape, smooth, minimalism, modern,  (8).jpeg": [
+    "shape",
+    "smooth",
+    "minimalism",
+    "modern"
+  ],
+  "shape, smooth, minimalism, modern,  (9).jpeg": [
+    "shape",
+    "smooth",
+    "minimalism",
+    "modern"
+  ],
+  "toned down, calm, ethereal, .jpg": [
+    "toned down",
+    "calm",
+    "ethereal"
+  ]
+};
+
+        // Category mapping - groups related tags
+        const categoryMap = {
+            'anime': ['anime'],
+            'dark': ['dark', 'black', 'goth'],
+            'minimal': ['minimalistic', 'clean', 'minimalism'],
+            'dreamy': ['dreamy', 'ethereal', 'aesthetic', 'aestethic', 'soft', 'calm', 'toned down', 'soft tones'],
+            'gradient': ['gradient', 'iridescent', 'fractal glass', 'pastel'],
+            'floral': ['floral'],
+            'chaotic': ['chaotic', 'chaos', 'bright'],
+            'shapes': ['shape', 'smooth', 'modern']
         };
 
-        const baseUrl = "https://raw.githubusercontent.com/D3Ext/aesthetic-wallpapers/main/images/";
+        const baseUrl = "Images/";
         const gallery = document.getElementById('gallery');
         const categoryFilter = document.getElementById('categoryFilter');
         const countDisplay = document.getElementById('count');
@@ -580,7 +1209,7 @@
             
             const item = document.createElement('div');
             item.className = 'gallery-item';
-            item.dataset.categories = imageData[image].join(',');
+            item.dataset.tags = imageData[image].join(',');
             
             const skeleton = document.createElement('div');
             skeleton.className = 'skeleton';
@@ -633,8 +1262,13 @@
                 if (category === 'all') {
                     item.classList.remove('hidden');
                 } else {
-                    const categories = item.dataset.categories.split(',');
-                    if (categories.includes(category)) {
+                    const tags = item.dataset.tags.split(',');
+                    const categoryTags = categoryMap[category] || [];
+                    
+                    // Check if any of the image's tags match the category
+                    const hasMatch = tags.some(tag => categoryTags.includes(tag.trim()));
+                    
+                    if (hasMatch) {
                         item.classList.remove('hidden');
                     } else {
                         item.classList.add('hidden');
