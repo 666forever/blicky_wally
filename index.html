@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blicky Wally</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            color: #fff;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #1a1a1a;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            cursor: pointer;
+        }
+
+        .download-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+        }
+
+        .gallery-item:hover .download-btn {
+            opacity: 1;
+        }
+
+        .download-btn:hover {
+            background: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 15px;
+                padding: 10px;
+            }
+
+            .gallery-item img {
+                height: 200px;
+            }
+
+            .download-btn {
+                opacity: 1;
+                bottom: 5px;
+                right: 5px;
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 20px 10px;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>BLICKY WALLY</h1>
+    </div>
+
+    <div class="gallery" id="gallery"></div>
+
+    <script>
+        const images = [
+            "arch_purple.png", "astronaut.jpg", "alfa.png", "arch-chan_to.png", 
+            "beautiful.jpg", "black.jpg", "arch-peace.png", "black-white-girl.png", 
+            "bunny.png", "chinese.png", "colorful-planets.jpg", "catppuccin-rainbow-arch.png", 
+            "colors.jpg", "cron.png", "ocean_with_cloud.png", "classic-arch.png", 
+            "cute-town-dark.png", "cute-town.png", "debian.png", "forest.png", 
+            "fox.png", "fantasy-woods.jpg", "girl.jpg", "girl-on-black.png", 
+            "orbit.png", "gray-background.png", "hands.jpg", "hill-house.png", 
+            "light-ring.jpg", "taza.png", "hello-worlds.png", "home127-dark.jpg", 
+            "home127-light.jpg", "4k-keyboard.jpg", "python-dev.png", "tree-house.png", 
+            "trigonometry.png", "wallpaper3-dark.png", "36592_serial_experiments_lain.png", 
+            "yellow_kyoto.jpg", "ign_colorful.png", "earth.png", "fire-skull.jpg", 
+            "fractal.png", "camp_day.png", "3squares.png", "japan.png", 
+            "japan2.jpg", "pink-katana.png", "jupiter.png", "japan3.jpg", 
+            "katana.jpg", "neon-shacks-nord.png", "knight.png", "landscape2.jpg", 
+            "lightning.jpg", "literal-wallpaper.png", "acrylic.jpg", "blue_demon.png", 
+            "lofi.jpg", "manga.png", "cyberpunk_car.png", "grey_red_tree.png", 
+            "minimal_nord_guy.png", "nord_dark_city.png", "nord_minimal_cat.png", 
+            "minim.jpg", "minimal_landscape.jpg", "moon.png", "mountains.png", 
+            "minimal-purple.jpg", "art-lake.png", "australia.jpg", "bici.jpg", 
+            "shiny-colors.png", "purple-girl.png", "nix.png", "manga-samurai.png", 
+            "TokyoSimplistic.jpg", "ign_megumin_dark.png", "interstellar_wallpaper.png", 
+            "nord_minimal_girl.png", "nord_purple_waves.png", "wallhaven-76d5xv.png", 
+            "wallpaper_nord_1.png", "pixiv_73483903.png", "man-colors.jpg", "naruto.png", 
+            "naruto_2.png", "nature.jpg", "neocity.png", "neocity2.jpg", 
+            "neosamurai.webp", "nordic.png", "nord-street.png", "onepiece.png", 
+            "wallhaven-j8ym1p.png", "wallhaven-nmr788.jpg", "python-minim.png", 
+            "wallhaven-rrpvd7.png", "autumn_leaves.jpg", "berserkdrac.png", 
+            "pastel-city.png", "pastel-car.png", "pastel-window.png", "pixelart_landscape.jpg", 
+            "pixel-earth.png", "pixel-city.png", "planets.png", "platforms.png", 
+            "puppy.jpg", "beach_landscape.png", "minimal_gradient.png", "nord_mask.png", 
+            "pixel_art_beach.jpeg", "pixelart_pagoda.jpg", "rad_samurai.jpg", 
+            "red-forest.jpg", "shougan_castle.png", "s4vitar.png", "s4vitar_old.png", 
+            "bmw.jpg", "green-girl.jpg", "gruvbox_forest-4.png", "gruvbox_retrocity.png", 
+            "gruvbox_room.png", "gruvbox_witcher.png", "japan-purple-blur.png", 
+            "catpuccin_w.png", "rick.jpg", "egypt.png", "horror_cult.jpg", 
+            "river.png", "rm-rf.jpg", "robot.jpg", "rocket.png", 
+            "room.jpg", "room2.jpg", "routine.jpg", "shibainu.jpeg", 
+            "swirls.png", "tech.png", "town.jpg", "two-astronauts.png", 
+            "trees.png", "yellow-robot.png", "em-rofi.webp", "gas-station.jpg", 
+            "glasses.png", "gradient-pb.png", "pacman-black.png", "plant.png", 
+            "wallhaven-z8pdqo.jpg", "blue-waves.png", "pink-clouds.png", 
+            "purple-mountain.png", "elon-musk.png", "purple-car.jpg", "nord-winter.png", 
+            "nord-shanghai.png", "color-waves.png", "arch-eagle.png", "blue-black-girl.png", 
+            "nasa1.png", "orange-planets.png", "pastel-japanese-temple.png", 
+            "underwater.png", "vader.png", "van.png", "venom.jpg", 
+            "win-11.png", "anime-eye-nord.png", "black_car_girl.jpg", "dark_skulls.png", 
+            "lofi_cat.png", "purple_car_girl.png", "wallhaven-0qrgwr.png", 
+            "japan_torii.png", "sunset-xfksfuywx.png", "tree-nature-castleinsky.png", 
+            "wallhaven-x67oxo.png", "waterfall.gif", "astronaut-nord.png", 
+            "deer-red-moon.png", "japanese-house.png", "pink-mecha.png", "wallhaven.png", 
+            "wallhaven-28rjj6.png", "nord_dots.png", "circuits.png", "abandoned.jpg", 
+            "abstract.jpg", "anime-chick.jpg", "astronaut-balloons.jpg", 
+            "astronaut-planet.jpg", "california.jpg", "cat_anime-girl.png", 
+            "catpuccin_samurai.png", "cool_rocks.png", "dark_forest.png", 
+            "pixel_big_city.png", "anime-nord.png", "anime-pond.png", "golden-mountains.png", 
+            "lets_go_home.png", "shiny_purple.png", "steampunk_portal.png", 
+            "towashi.jpg", "waves_dracula_flipped.png", "sunset_city.png", 
+            "aurora_v02.png", "got_bw.jpg", "got_red.jpg", "nord-chainsaw.png", 
+            "nord-princess-zelda.jpg", "pacman-nord.png", "pixelart-colors.png", 
+            "virus-nord.png", "astronaut-rocket.jpg", "black-panther.jpg", "cat.jpg", 
+            "cliff-edge.jpg", "coffee.jpg", "deer-forest.jpg", "demon.jpg", 
+            "forest-bridge.jpg", "anime_cafe_tokyonight.png", "anime_skyline.png", 
+            "goldfish.jpg", "green-sun.jpg", "lake.jpg", "leave-planet.jpg", 
+            "holy-arch-nordic.png", "needing-space.jpg", "neon-lights.jpg", 
+            "odysee.jpg", "orange-cube.jpg", "saturn-rings.jpg", "staircase.jpg", 
+            "wallhaven-9mjw78.png", "wallhaven-q21vkl.jpg", "anime-water.png", 
+            "blue-red-4k.png", "minim-helmet.png", "neon-car2.png", "4k-ai-mountain.jpg", 
+            "estrategy-minimal.png", "nord-shards.jpg", "plain-wallpaper.png", 
+            "wano_vector.png", "windmill.jpg", "you-got-this.jpg", "cabin.png", 
+            "ink_wave.png", "lofi-cafe_gray.jpg", "minim_blocks.png", 
+            "pixelart_forest.jpg", "shape-abstract.jpg", "smooth_blue.png", 
+            "smooth_pink.png", "Doodle_Space_Nord.png", "japan_anime_city.jpg", 
+            "mecha-nostalgia.png", "plane_sunset.png", "planet_minimal.png", 
+            "train_and_lake.png", "white_yinyang.jpg", "awesome.png", 
+            "my-neighbor-totoro-sunflowers.png", "gruvbox_code.png", "catpuccin_landscape.png", 
+            "guy_sleeping_colored.png", "mocha_steampunk.jpg", "mushroom-purple.png", 
+            "oled-mountains.jpg", "purple-bomb.png", "purple-crystal.png", 
+            "alien_planet.jpeg", "dopesmoker_gruvbox.png", "polar_catppuccin.png", 
+            "sushi_dark.png", "lana_silhouette.png", "wave_black.png", 
+            "flower_tokyo.png", "tiger-gray.jpg", "skyline.png", "falltree.jpg", 
+            "field.jpeg", "rick-tokyonight.png", "wallhaven-e7m8zl.jpg", 
+            "wallhaven-lmxwdl.jpg", "beige_tree.png", "dark_pixelart.png", 
+            "haskell.png", "ibmbios8x8_intel.png", "minimal_c.png", 
+            "minimal_python.png", "purple_plane_landscape.png", "uj21s0by4v271.jpg", 
+            "planet_with_sunrise.png", "fishing_stars.jpg", "kiryu_black.png", 
+            "one-piece-luffy.jpg", "pond_shed.png", "retro_market.png", "weeknd.png", 
+            "a_cartoon_of_a_house_on_a_cliff.png", "futuristicAncientTree.png", 
+            "apple_gruvbox.jpg", "house-art.webp", "pixel-waterfall.webp", "trad-waves.webp"
+        ];
+
+        const baseUrl = "https://raw.githubusercontent.com/D3Ext/aesthetic-wallpapers/main/images/";
+        const gallery = document.getElementById('gallery');
+
+        images.forEach(image => {
+            const imageUrl = baseUrl + image;
+            
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            
+            const img = document.createElement('img');
+            img.src = imageUrl;
+            img.alt = image.replace(/\.[^/.]+$/, "").replace(/-|_/g, " ");
+            img.loading = 'lazy';
+            img.onclick = () => window.open(imageUrl, '_blank');
+            
+            const downloadBtn = document.createElement('button');
+            downloadBtn.className = 'download-btn';
+            downloadBtn.textContent = '↓';
+            downloadBtn.onclick = (e) => {
+                e.stopPropagation();
+                const link = document.createElement('a');
+                link.href = imageUrl;
+                link.download = image;
+                link.click();
+            };
+            
+            item.appendChild(img);
+            item.appendChild(downloadBtn);
+            gallery.appendChild(item);
+        });
+    </script>
+</body>
+</html>
