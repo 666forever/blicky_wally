@@ -142,28 +142,7 @@
             display: none;
         }
 
-        .download-btn {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background: rgba(255, 255, 255, 0.9);
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 10;
-        }
 
-        .gallery-item:hover .download-btn {
-            opacity: 1;
-        }
-
-        .download-btn:hover {
-            background: #fff;
-        }
 
         @media (max-width: 768px) {
             .header h1 {
@@ -189,14 +168,6 @@
             .gallery-item img,
             .skeleton {
                 height: 200px;
-            }
-
-            .download-btn {
-                opacity: 1;
-                bottom: 5px;
-                right: 5px;
-                padding: 6px 12px;
-                font-size: 12px;
             }
         }
 
@@ -1202,9 +1173,12 @@
         const countDisplay = document.getElementById('count');
         
         let currentFilter = 'all';
+        let allImages = Object.keys(imageData);
+        let loadedCount = 0;
+        const BATCH_SIZE = 30; // Load 30 images at a time
 
-        // Create gallery items
-        Object.keys(imageData).forEach(image => {
+        // Create gallery item element
+        function createGalleryItem(image) {
             const imageUrl = baseUrl + image;
             
             const item = document.createElement('div');
@@ -1225,22 +1199,50 @@
                 this.classList.add('loaded');
             };
             
-            const downloadBtn = document.createElement('button');
-            downloadBtn.className = 'download-btn';
-            downloadBtn.textContent = '↓';
-            downloadBtn.onclick = (e) => {
-                e.stopPropagation();
-                const link = document.createElement('a');
-                link.href = imageUrl;
-                link.download = image;
-                link.click();
-            };
-            
             item.appendChild(img);
             item.appendChild(skeleton);
-            item.appendChild(downloadBtn);
-            gallery.appendChild(item);
+            
+            return item;
+        }
+
+        // Load next batch of images
+        function loadNextBatch() {
+            const fragment = document.createDocumentFragment();
+            const end = Math.min(loadedCount + BATCH_SIZE, allImages.length);
+            
+            for (let i = loadedCount; i < end; i++) {
+                const item = createGalleryItem(allImages[i]);
+                fragment.appendChild(item);
+            }
+            
+            gallery.appendChild(fragment);
+            loadedCount = end;
+            
+            updateCount();
+            
+            // If all images loaded, disconnect observer
+            if (loadedCount >= allImages.length) {
+                observer.disconnect();
+            }
+        }
+
+        // Intersection Observer for infinite scroll
+        const sentinel = document.createElement('div');
+        sentinel.style.height = '1px';
+        
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && loadedCount < allImages.length) {
+                loadNextBatch();
+            }
+        }, {
+            rootMargin: '500px' // Start loading 500px before reaching bottom
         });
+
+        // Initial load
+        loadNextBatch();
+        gallery.appendChild(sentinel);
+        observer.observe(sentinel);
+
 
         // Update count
         function updateCount() {
@@ -1256,31 +1258,28 @@
             const category = e.target.value;
             currentFilter = category;
             
-            // Filter images
-            const items = document.querySelectorAll('.gallery-item');
-            items.forEach(item => {
-                if (category === 'all') {
-                    item.classList.remove('hidden');
-                } else {
-                    const tags = item.dataset.tags.split(',');
-                    const categoryTags = categoryMap[category] || [];
-                    
-                    // Check if any of the image's tags match the category
-                    const hasMatch = tags.some(tag => categoryTags.includes(tag.trim()));
-                    
-                    if (hasMatch) {
-                        item.classList.remove('hidden');
-                    } else {
-                        item.classList.add('hidden');
-                    }
-                }
-            });
+            // Filter the images array
+            if (category === 'all') {
+                allImages = Object.keys(imageData);
+            } else {
+                const categoryTags = categoryMap[category] || [];
+                allImages = Object.keys(imageData).filter(image => {
+                    const tags = imageData[image];
+                    return tags.some(tag => categoryTags.includes(tag.trim()));
+                });
+            }
             
-            updateCount();
+            // Clear gallery and reload
+            gallery.innerHTML = '';
+            loadedCount = 0;
+            
+            // Re-add sentinel
+            gallery.appendChild(sentinel);
+            observer.observe(sentinel);
+            
+            // Load first batch
+            loadNextBatch();
         });
-
-        // Initial count
-        updateCount();
     </script>
 </body>
 </html>
