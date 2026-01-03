@@ -81,16 +81,37 @@
         }
 
         .count {
-            color: #666;
-            font-size: 0.9rem;
-            margin-top: 10px;
+            display: none;
+        }
+
+        .filter-tag {
+            background: none;
+            color: #E6E6E6;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 0;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            transition: color 0.2s ease;
+            display: inline-block;
+        }
+
+        .filter-tag:hover {
+            color: #fff;
+        }
+
+        .filter-tag.active {
+            color: #fff;
+            border-bottom: 2px solid #fff;
+            padding-bottom: 6px;
         }
 
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -101,6 +122,7 @@
             border-radius: 8px;
             background: #1a1a1a;
             transition: transform 0.3s ease, opacity 0.3s ease;
+            aspect-ratio: 16 / 9;
         }
 
         .gallery-item.hidden {
@@ -113,12 +135,12 @@
 
         .gallery-item img {
             width: 100%;
-            height: 450px;
+            height: 100%;
             object-fit: cover;
             display: block;
             cursor: pointer;
             opacity: 0;
-            transition: opacity 3s ease;
+            transition: opacity 0.5s ease;
         }
 
         .gallery-item img.loaded {
@@ -130,7 +152,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 250px;
+            height: 100%;
             background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
             background-size: 200% 100%;
             animation: loading 1.5s infinite;
@@ -156,24 +178,19 @@
             }
 
             .filters {
-                flex-direction: column;
+                flex-wrap: wrap;
                 gap: 10px;
             }
 
-            .filter-dropdown {
-                width: 100%;
-                max-width: 300px;
+            .filter-tag {
+                padding: 8px 14px;
+                font-size: 13px;
             }
 
             .gallery {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                grid-template-columns: repeat(2, 1fr);
                 gap: 15px;
                 padding: 10px;
-            }
-
-            .gallery-item img,
-            .skeleton {
-                height: 200px;
             }
         }
 
@@ -190,17 +207,17 @@
                 font-size: 1.5rem;
             }
 
-            .filter-label {
-                font-size: 13px;
+            .filters {
+                gap: 8px;
             }
 
-            .filter-dropdown {
-                font-size: 13px;
-                padding: 8px 15px;
+            .filter-tag {
+                padding: 6px 10px;
+                font-size: 12px;
             }
 
             .gallery {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: 1fr;
                 gap: 10px;
             }
         }
@@ -209,23 +226,7 @@
 <body>
     <div class="header">
         <h1>Blicky bless me, Chapo, Draco bless me</h1>
-        <div class="filters">
-            <label class="filter-label" for="categoryFilter">Filter:</label>
-            <select class="filter-dropdown" id="categoryFilter">
-                <option value="all">All Categories</option>
-                <option value="abstract">Abstract</option>
-                <option value="anime">Anime</option>
-                <option value="artsy">Artsy</option>
-                <option value="floral">Floral</option>
-                <option value="fractal glass">Fractal Glass</option>
-                <option value="gradients">Gradients</option>
-                <option value="iridescent">Iridescent</option>
-                <option value="pastel">Pastel</option>
-                <option value="phone">Phone</option>
-                <option value="other">Other</option>
-            </select>
-        </div>
-        <div class="count" id="count"></div>
+        <div class="filters" id="filters"></div>
     </div>
 
     <div class="gallery" id="gallery"></div>
@@ -459,49 +460,78 @@
                     "--bg-photography-02.jpg",
                     "--bg-photography-03.jpg"
           ]
-};
+        };
 
-        const baseUrl = "Images/";
+        const BASE_URL = "Images/";
+        const BATCH_SIZE = 30;
+        
         const gallery = document.getElementById('gallery');
-        const categoryFilter = document.getElementById('categoryFilter');
-        const countDisplay = document.getElementById('count');
+        const filtersContainer = document.getElementById('filters');
         
         let currentFilter = 'all';
-        let allImages = [];
+        let displayedImages = [];
         let loadedCount = 0;
-        const BATCH_SIZE = 30;
+        let observer = null;
+        let sentinel = null;
 
-        // Build flat list of all images with their paths
+        // Memoized image list builder
+        let cachedAllImages = null;
         function buildImageList() {
+            if (cachedAllImages) return cachedAllImages;
+            
             const images = [];
             for (const [category, files] of Object.entries(imageData)) {
                 files.forEach(file => {
-                    const path = category === 'other' ? file : `${category}/${file}`;
-                    images.push({ path, category, filename: file });
+                    images.push({
+                        path: `${category}/${file}`,
+                        category,
+                        filename: file
+                    });
                 });
             }
+            cachedAllImages = images;
             return images;
         }
 
-        // Initialize
-        allImages = buildImageList();
+        // Initialize image list
+        const allImages = buildImageList();
+        displayedImages = [...allImages];
 
-        // Create gallery item element
+        // Create filter tags
+        function initializeFilters() {
+            const categories = ['all', ...Object.keys(imageData)];
+            
+            categories.forEach(category => {
+                const tag = document.createElement('button');
+                tag.className = 'filter-tag';
+                tag.dataset.category = category;
+                tag.textContent = category === 'all' ? 'All' : category;
+                
+                if (category === 'all') {
+                    tag.classList.add('active');
+                }
+                
+                tag.addEventListener('click', () => filterByCategory(category));
+                filtersContainer.appendChild(tag);
+            });
+        }
+
+        // Create gallery item
         function createGalleryItem(imageObj) {
-            const imageUrl = baseUrl + imageObj.path;
+            const imageUrl = BASE_URL + imageObj.path;
             
             const item = document.createElement('div');
             item.className = 'gallery-item';
             item.dataset.category = imageObj.category;
-            
-            const skeleton = document.createElement('div');
-            skeleton.className = 'skeleton';
             
             const img = document.createElement('img');
             img.src = imageUrl;
             img.alt = imageObj.filename.replace(/\.[^/.]+$/, "").replace(/-|_/g, " ");
             img.loading = 'lazy';
             img.onclick = () => window.open(imageUrl, '_blank');
+            
+            const skeleton = document.createElement('div');
+            skeleton.className = 'skeleton';
             
             img.onload = function() {
                 this.classList.add('loaded');
@@ -516,72 +546,76 @@
         // Load next batch of images
         function loadNextBatch() {
             const fragment = document.createDocumentFragment();
-            const end = Math.min(loadedCount + BATCH_SIZE, allImages.length);
+            const end = Math.min(loadedCount + BATCH_SIZE, displayedImages.length);
             
             for (let i = loadedCount; i < end; i++) {
-                const item = createGalleryItem(allImages[i]);
+                const item = createGalleryItem(displayedImages[i]);
                 fragment.appendChild(item);
             }
             
             gallery.appendChild(fragment);
             loadedCount = end;
             
-            updateCount();
-            
-            if (loadedCount >= allImages.length) {
+            // Disconnect observer if all images loaded
+            if (loadedCount >= displayedImages.length && observer) {
                 observer.disconnect();
             }
         }
 
-        // Intersection Observer for infinite scroll
-        const sentinel = document.createElement('div');
-        sentinel.style.height = '1px';
-        
-        const observer = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting && loadedCount < allImages.length) {
-                loadNextBatch();
+        // Setup Intersection Observer
+        function setupObserver() {
+            if (observer) {
+                observer.disconnect();
             }
-        }, {
-            rootMargin: '500px'
-        });
 
-        // Initial load
-        loadNextBatch();
-        gallery.appendChild(sentinel);
-        observer.observe(sentinel);
+            sentinel = document.createElement('div');
+            sentinel.style.height = '1px';
 
-        // Update count
-        function updateCount() {
-            const totalImages = buildImageList().length;
-            const visible = document.querySelectorAll('.gallery-item:not(.hidden)').length;
-            countDisplay.textContent = currentFilter === 'all' 
-                ? `${totalImages} wallpapers` 
-                : `${visible} of ${totalImages} wallpapers`;
+            observer = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting && loadedCount < displayedImages.length) {
+                    loadNextBatch();
+                }
+            }, {
+                rootMargin: '500px'
+            });
+
+            observer.observe(sentinel);
         }
 
-        // Filter functionality
-        categoryFilter.addEventListener('change', (e) => {
-            const category = e.target.value;
+        // Filter by category
+        function filterByCategory(category) {
             currentFilter = category;
             
-            // Filter the images array
+            // Update active tag
+            document.querySelectorAll('.filter-tag').forEach(tag => {
+                tag.classList.remove('active');
+                if (tag.dataset.category === category) {
+                    tag.classList.add('active');
+                }
+            });
+            
+            // Filter images
             if (category === 'all') {
-                allImages = buildImageList();
+                displayedImages = [...allImages];
             } else {
-                allImages = buildImageList().filter(img => img.category === category);
+                displayedImages = allImages.filter(img => img.category === category);
             }
             
-            // Clear gallery and reload
+            // Reset gallery
             gallery.innerHTML = '';
             loadedCount = 0;
             
-            // Re-add sentinel
-            gallery.appendChild(sentinel);
-            observer.observe(sentinel);
-            
-            // Load first batch
+            // Setup observer, load first batch, then add sentinel
+            setupObserver();
             loadNextBatch();
-        });
+            gallery.appendChild(sentinel);
+        }
+
+        // Initialize
+        initializeFilters();
+        setupObserver();
+        loadNextBatch();
+        gallery.appendChild(sentinel);
     </script>
 </body>
 </html>
