@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blicky Wally</title>
+
+      <link
+    rel="icon"
+    type="image/png"
+    href="https://666forever.github.io/discord/assets/logored.png"
+  />
+
+
     <style>
         * {
             margin: 0;
@@ -12,7 +20,7 @@
         }
 
         body {
-            background-color: #0a0a0a;
+            background-color: #1A1A1A;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             padding: 20px;
         }
@@ -20,7 +28,7 @@
         .header {
             text-align: center;
             padding: 40px 20px 20px;
-            color: #fff;
+            color: #E6E6E6;
         }
 
         .header h1 {
@@ -32,15 +40,15 @@
 
         .filters {
             display: flex;
-            justify-content: center;
+            justify-content: left;
             align-items: center;
             gap: 15px;
             margin-bottom: 20px;
         }
 
         .filter-label {
-            color: #fff;
-            font-size: 14px;
+            color: #B3B3B3;
+            font-size: 18px;
             font-weight: 500;
         }
 
@@ -105,12 +113,12 @@
 
         .gallery-item img {
             width: 100%;
-            height: 250px;
+            height: 450px;
             object-fit: cover;
             display: block;
             cursor: pointer;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 3s ease;
         }
 
         .gallery-item img.loaded {
@@ -225,176 +233,233 @@
     <script>
         // Image data organized by folder
         const imageData = {
-            "abstract": [
-                "gradient, chaotic, bright, (1).jpeg",
-                "shape, purple, anime, styled, toned down, (3).jpg",
-                "shape, purple, anime, styled, toned down, (4).jpeg",
-                "shape, purple, anime, styled, toned down, (4).jpg",
-                "shape, purple, anime, styled, toned down, (5).jpg",
-                "shape, smooth, minimalism, modern,  (1).jpeg",
-                "shape, smooth, minimalism, modern,  (10).jpg",
-                "shape, smooth, minimalism, modern,  (11).jpeg",
-                "shape, smooth, minimalism, modern,  (11).jpg",
-                "shape, smooth, minimalism, modern,  (12).jpeg",
-                "shape, smooth, minimalism, modern,  (12).jpg",
-                "shape, smooth, minimalism, modern,  (13).jpg",
-                "shape, smooth, minimalism, modern,  (14).jpg",
-                "shape, smooth, minimalism, modern,  (16).jpeg",
-                "shape, smooth, minimalism, modern,  (4).jpeg",
-                "shape, smooth, minimalism, modern,  (5).jpeg",
-                "shape, smooth, minimalism, modern,  (6).jpeg",
-                "shape, smooth, minimalism, modern,  (7).jpeg",
-                "shape, smooth, minimalism, modern,  (8).jpeg",
-                "shape, smooth, minimalism, modern,  (9).jpeg",
-                "toned down, calm, ethereal, .jpg"
-            ],
-            "anime": [
-                "anime (1).jpeg",
-                "anime (1).jpg",
-                "anime (1).png",
-                "anime (11).png",
-                "anime (12).jpg",
-                "anime (12).png",
-                "anime (13).jpg",
-                "anime (14).jpg",
-                "anime (15).jpg",
-                "anime (16).jpg",
-                "anime (17).jpg",
-                "anime (2).jpeg",
-                "anime (2).jpg",
-                "anime (2).png",
-                "anime (3).jpeg",
-                "anime (3).jpg",
-                "anime (3).png",
-                "anime (4).jpg",
-                "anime (4).png",
-                "anime (5).jpeg",
-                "anime (5).png",
-                "anime (6).jpeg",
-                "anime (6).jpg",
-                "anime (6).png",
-                "anime (7).jpeg",
-                "anime (7).png",
-                "anime (8).jpg",
-                "anime (8).png",
-                "anime (9).png",
-                "purple, anime, styled, toned down, (2).jpg",
-                "purple, anime, styled, toned down, (2).png",
-                "purple, anime, styled, toned down, (5).jpg",
-                "purple, anime, styled, toned down, (6).jpg"
-            ],
-            "artsy": [
-                "dreamy, soft tones, aesthetic,  (1).jpg",
-                "dreamy, soft tones, aesthetic,  (2).jpg",
-                "dreamy, soft tones, aesthetic,  (3).jpg",
-                "dreamy, soft tones, aesthetic,  (4).jpg",
-                "dreamy, soft tones, aesthetic,  (5).jpg",
-                "dreamy, soft tones, aesthetic,  (6).jpg"
-            ],
-            "floral": [
-                "floral (1).jpg",
-                "floral (10).jpg",
-                "floral (11).jpg",
-                "floral (12).jpg",
-                "floral (13).jpg",
-                "floral (14).jpg",
-                "floral (2).jpg",
-                "floral (3).jpg",
-                "floral (4).jpg",
-                "floral (5).jpg",
-                "floral (6).jpg",
-                "floral (7).jpg",
-                "floral (8).jpg",
-                "floral (9).jpg"
-            ],
-            "fractal glass": [
-                "fractal glass, gradient, soft, minimalism, clean,  (1).jpg",
-                "fractal glass, gradient, soft, minimalism, clean,  (10).jpg",
-                "fractal glass, gradient, soft, minimalism, clean,  (11).jpg",
-                "fractal glass, gradient, soft, minimalism, clean,  (2).jpg",
-                "fractal glass, gradient, soft, minimalism, clean,  (3).jpg",
-                "fractal glass, gradient, soft, minimalism, clean,  (4).jpg",
-                "fractal glass, gradient, soft, minimalism, clean,  (5).jpg",
-                "fractal glass, gradient, soft, minimalism, clean,  (6).jpg",
-                "fractal glass, gradient, soft, minimalism, clean,  (7).jpg",
-                "fractal glass, gradient, soft, minimalism, clean,  (8).jpg",
-                "fractal glass, gradient, soft, minimalism, clean,  (9).jpg",
-                "fractal glass, gradient, soft, minimalism, clean, (10).jpg"
-            ],
-            "gradients": [
-                "gradient (1).jpg",
-                "gradient (1).png",
-                "gradient (10).jpg",
-                "gradient (11).jpg",
-                "gradient (12).jpg",
-                "gradient (2).jpg",
-                "gradient (2).png",
-                "gradient (3).jpg",
-                "gradient (3).png",
-                "gradient (4).jpg",
-                "gradient (4).png",
-                "gradient (5).jpg",
-                "gradient (5).png",
-                "gradient (6).jpg",
-                "gradient (6).png",
-                "gradient (7).jpg",
-                "gradient (7).png",
-                "gradient (8).jpg",
-                "gradient (9).jpg",
-                "purple, styled, toned down, (2).jpg",
-                "purple, styled, toned down, (2).png",
-                "purple, styled, toned down, (3).png"
-            ],
-            "iridescent": [
-                "iridescent, clean, calm,  (1).jpg",
-                "iridescent, clean, calm,  (10).jpg",
-                "iridescent, clean, calm,  (2).jpg",
-                "iridescent, clean, calm,  (3).jpg",
-                "iridescent, clean, calm,  (4).jpg",
-                "iridescent, clean, calm,  (5).jpg",
-                "iridescent, clean, calm,  (6).jpg",
-                "iridescent, clean, calm,  (7).jpg",
-                "iridescent, clean, calm,  (8).jpg",
-                "iridescent, clean, calm,  (9).jpg",
-                "iridescent, clean, calm, .jpg"
-            ],
-            "pastel": [
-                "gradient, pastel, white, iridescent,  (1).jpg",
-                "gradient, pastel, white, iridescent,  (10).jpg",
-                "gradient, pastel, white, iridescent,  (11).jpg",
-                "gradient, pastel, white, iridescent,  (2).jpg",
-                "gradient, pastel, white, iridescent,  (3).jpg",
-                "gradient, pastel, white, iridescent,  (4).jpg",
-                "gradient, pastel, white, iridescent,  (5).jpg",
-                "gradient, pastel, white, iridescent,  (6).jpg",
-                "gradient, pastel, white, iridescent,  (7).jpg",
-                "gradient, pastel, white, iridescent,  (8).jpg",
-                "gradient, pastel, white, iridescent,  (9).jpg",
-                "gradient, pastel, white, iridescent, (12).jpg"
-            ],
-            "phone": [
-                "phone (1).jpg",
-                "phone (2).jpg",
-                "phone (3).jpg",
-                "phone (4).jpg",
-                "phone (5).jpg",
-                "phone (6).jpg",
-                "phone (7).jpg",
-                "phone (8).jpg",
-                "phone (9).jpg"
-            ],
-            "other": [
-                "anime (5).jpg",
-                "anime (9).jpg",
-                "dark, .jpg",
-                "dark, minimalistic, chaos (1).png",
-                "dark, minimalistic, chaos (2).png",
-                "dark, minimalistic, chaos (3).png",
-                "dark, minimalistic, clean, .jpg",
-                "purple, anime, styled, toned down, (7).jpg",
-                "shape, smooth, minimalism, modern,  (15).jpg"
-            ]
-        };
+          "abstract": [
+                    "--bg-abstract-01.jpeg",
+                    "--bg-abstract-02.jpg",
+                    "--bg-abstract-03.jpeg",
+                    "--bg-abstract-04.jpg",
+                    "--bg-abstract-05.jpeg",
+                    "--bg-abstract-06.jpg",
+                    "--bg-abstract-07.jpeg",
+                    "--bg-abstract-08.jpeg",
+                    "--bg-abstract-09.jpg",
+                    "--bg-abstract-10.jpeg",
+                    "--bg-abstract-11.jpg",
+                    "--bg-abstract-12.jpeg",
+                    "--bg-abstract-13.jpg",
+                    "--bg-abstract-14.jpeg",
+                    "--bg-abstract-15.jpg",
+                    "--bg-abstract-16.jpeg",
+                    "--bg-abstract-17.jpg",
+                    "--bg-abstract-18.jpeg",
+                    "--bg-abstract-19.jpg",
+                    "--bg-abstract-20.jpeg",
+                    "--bg-abstract-21.jpg",
+                    "--bg-abstract-22.jpeg",
+                    "--bg-abstract-23.jpg"
+          ],
+          "anime": [
+                    "--bg-anime-01.jpeg",
+                    "--bg-anime-02.jpg",
+                    "--bg-anime-03.png",
+                    "--bg-anime-04.jpg",
+                    "--bg-anime-05.png",
+                    "--bg-anime-06.jpg",
+                    "--bg-anime-07.png",
+                    "--bg-anime-08.jpg",
+                    "--bg-anime-09.png",
+                    "--bg-anime-10.jpg",
+                    "--bg-anime-11.png",
+                    "--bg-anime-12.jpg",
+                    "--bg-anime-13.png",
+                    "--bg-anime-14.jpg",
+                    "--bg-anime-15.png",
+                    "--bg-anime-16.jpg",
+                    "--bg-anime-17.png",
+                    "--bg-anime-18.jpg",
+                    "--bg-anime-19.png",
+                    "--bg-anime-20.jpg",
+                    "--bg-anime-21.png",
+                    "--bg-anime-22.jpg",
+                    "--bg-anime-23.png",
+                    "--bg-anime-24.jpg",
+                    "--bg-anime-25.png",
+                    "--bg-anime-26.jpg",
+                    "--bg-anime-27.png",
+                    "--bg-anime-28.jpg",
+                    "--bg-anime-29.jpg",
+                    "--bg-anime-30.jpg",
+                    "--bg-anime-31.jpg",
+                    "--bg-anime-32.jpg",
+                    "--bg-anime-33.jpg",
+                    "--bg-anime-34.jpg",
+                    "--bg-anime-35.jpg",
+                    "--bg-anime-36.jpg",
+                    "--bg-anime-37.jpeg",
+                    "--bg-anime-38.jpg",
+                    "--bg-anime-39.png",
+                    "--bg-anime-40.jpg",
+                    "--bg-anime-41.jpg",
+                    "--bg-anime-42.jpg",
+                    "--bg-anime-43.jpg",
+                    "--bg-anime-44.jpeg",
+                    "--bg-anime-45.jpg",
+                    "--bg-anime-46.png",
+                    "--bg-anime-47.jpg",
+                    "--bg-anime-48.png",
+                    "--bg-anime-49.jpeg",
+                    "--bg-anime-50.jpg",
+                    "--bg-anime-51.png",
+                    "--bg-anime-52.jpeg",
+                    "--bg-anime-53.jpg",
+                    "--bg-anime-54.png",
+                    "--bg-anime-55.jpeg",
+                    "--bg-anime-56.jpg",
+                    "--bg-anime-57.png",
+                    "--bg-anime-58.jpg",
+                    "--bg-anime-59.png"
+          ],
+          "Art from bisBiswas": [
+                    "--bg-art-from-bisbiswas-01.jpg",
+                    "--bg-art-from-bisbiswas-02.png",
+                    "--bg-art-from-bisbiswas-03.jpg",
+                    "--bg-art-from-bisbiswas-04.jpg",
+                    "--bg-art-from-bisbiswas-05.jpg",
+                    "--bg-art-from-bisbiswas-06.jpg",
+                    "--bg-art-from-bisbiswas-07.jpg",
+                    "--bg-art-from-bisbiswas-08.jpg",
+                    "--bg-art-from-bisbiswas-09.jpg",
+                    "--bg-art-from-bisbiswas-10.png",
+                    "--bg-art-from-bisbiswas-11.jpg",
+                    "--bg-art-from-bisbiswas-12.jpg",
+                    "--bg-art-from-bisbiswas-13.jpg",
+                    "--bg-art-from-bisbiswas-14.jpg",
+                    "--bg-art-from-bisbiswas-15.jpg",
+                    "--bg-art-from-bisbiswas-16.jpg",
+                    "--bg-art-from-bisbiswas-17.jpg",
+                    "--bg-art-from-bisbiswas-18.jpg",
+                    "--bg-art-from-bisbiswas-19.jpg",
+                    "--bg-art-from-bisbiswas-20.jpg",
+                    "--bg-art-from-bisbiswas-21.jpg",
+                    "--bg-art-from-bisbiswas-22.jpg",
+                    "--bg-art-from-bisbiswas-23.jpg",
+                    "--bg-art-from-bisbiswas-24.jpg"
+          ],
+          "floral": [
+                    "--bg-floral-01.jpg",
+                    "--bg-floral-02.jpg",
+                    "--bg-floral-03.jpg",
+                    "--bg-floral-04.jpg",
+                    "--bg-floral-05.jpg",
+                    "--bg-floral-06.jpg",
+                    "--bg-floral-07.jpg",
+                    "--bg-floral-08.jpg",
+                    "--bg-floral-09.jpg",
+                    "--bg-floral-10.jpg",
+                    "--bg-floral-11.jpg",
+                    "--bg-floral-12.jpg",
+                    "--bg-floral-13.jpg",
+                    "--bg-floral-14.jpg"
+          ],
+          "fractal glass": [
+                    "--bg-fractal-glass-01.jpg",
+                    "--bg-fractal-glass-02.jpg",
+                    "--bg-fractal-glass-03.jpg",
+                    "--bg-fractal-glass-04.jpg",
+                    "--bg-fractal-glass-05.jpg",
+                    "--bg-fractal-glass-06.jpg",
+                    "--bg-fractal-glass-07.jpg",
+                    "--bg-fractal-glass-08.jpg",
+                    "--bg-fractal-glass-09.jpg",
+                    "--bg-fractal-glass-10.jpg",
+                    "--bg-fractal-glass-11.jpg",
+                    "--bg-fractal-glass-12.jpg"
+          ],
+          "gradients": [
+                    "--bg-gradients-01.jpg",
+                    "--bg-gradients-02.png",
+                    "--bg-gradients-03.jpg",
+                    "--bg-gradients-04.png",
+                    "--bg-gradients-05.jpg",
+                    "--bg-gradients-06.png",
+                    "--bg-gradients-07.jpg",
+                    "--bg-gradients-08.png",
+                    "--bg-gradients-09.jpg",
+                    "--bg-gradients-10.png",
+                    "--bg-gradients-11.jpg",
+                    "--bg-gradients-12.png",
+                    "--bg-gradients-13.jpg",
+                    "--bg-gradients-14.png",
+                    "--bg-gradients-15.jpg",
+                    "--bg-gradients-16.jpg",
+                    "--bg-gradients-17.jpg",
+                    "--bg-gradients-18.jpg",
+                    "--bg-gradients-19.jpg",
+                    "--bg-gradients-20.png",
+                    "--bg-gradients-21.jpg",
+                    "--bg-gradients-22.jpg",
+                    "--bg-gradients-23.jpg",
+                    "--bg-gradients-24.jpg",
+                    "--bg-gradients-25.jpg",
+                    "--bg-gradients-26.png",
+                    "--bg-gradients-27.jpg",
+                    "--bg-gradients-28.png"
+          ],
+          "iridescent": [
+                    "--bg-iridescent-01.jpg",
+                    "--bg-iridescent-02.jpg",
+                    "--bg-iridescent-03.jpg",
+                    "--bg-iridescent-04.jpg",
+                    "--bg-iridescent-05.jpg",
+                    "--bg-iridescent-06.jpg",
+                    "--bg-iridescent-07.jpg",
+                    "--bg-iridescent-08.jpg",
+                    "--bg-iridescent-09.jpg",
+                    "--bg-iridescent-10.jpg",
+                    "--bg-iridescent-11.jpg"
+          ],
+          "Minimal": [
+                    "--bg-minimal-01.png",
+                    "--bg-minimal-02.jpg",
+                    "--bg-minimal-03.jpg",
+                    "--bg-minimal-04.png",
+                    "--bg-minimal-05.png",
+                    "--bg-minimal-06.png",
+                    "--bg-minimal-07.jpg",
+                    "--bg-minimal-08.jpg",
+                    "--bg-minimal-09.png"
+          ],
+          "pastel": [
+                    "--bg-pastel-01.jpg",
+                    "--bg-pastel-02.jpg",
+                    "--bg-pastel-03.jpg",
+                    "--bg-pastel-04.jpg",
+                    "--bg-pastel-05.jpg",
+                    "--bg-pastel-06.jpg",
+                    "--bg-pastel-07.jpg",
+                    "--bg-pastel-08.jpg",
+                    "--bg-pastel-09.jpg",
+                    "--bg-pastel-10.jpg",
+                    "--bg-pastel-11.jpg",
+                    "--bg-pastel-12.jpg"
+          ],
+          "phone": [
+                    "--bg-phone-01.jpg",
+                    "--bg-phone-02.jpg",
+                    "--bg-phone-03.jpg",
+                    "--bg-phone-04.jpg",
+                    "--bg-phone-05.jpg",
+                    "--bg-phone-06.jpg",
+                    "--bg-phone-07.jpg",
+                    "--bg-phone-08.jpg",
+                    "--bg-phone-09.jpg"
+          ],
+          "photography": [
+                    "--bg-photography-01.jpg",
+                    "--bg-photography-02.jpg",
+                    "--bg-photography-03.jpg"
+          ]
+};
 
         const baseUrl = "Images/";
         const gallery = document.getElementById('gallery');
