@@ -142,8 +142,6 @@
             display: none;
         }
 
-
-
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2rem;
@@ -207,14 +205,16 @@
             <label class="filter-label" for="categoryFilter">Filter:</label>
             <select class="filter-dropdown" id="categoryFilter">
                 <option value="all">All Categories</option>
+                <option value="abstract">Abstract</option>
                 <option value="anime">Anime</option>
-                <option value="dark">Dark / Goth</option>
-                <option value="minimal">Minimal</option>
-                <option value="dreamy">Dreamy / Ethereal</option>
-                <option value="gradient">Gradient / Iridescent</option>
+                <option value="artsy">Artsy</option>
                 <option value="floral">Floral</option>
-                <option value="chaotic">Chaotic / Bright</option>
-                <option value="shapes">Shapes / Modern</option>
+                <option value="fractal glass">Fractal Glass</option>
+                <option value="gradients">Gradients</option>
+                <option value="iridescent">Iridescent</option>
+                <option value="pastel">Pastel</option>
+                <option value="phone">Phone</option>
+                <option value="other">Other</option>
             </select>
         </div>
         <div class="count" id="count"></div>
@@ -223,948 +223,177 @@
     <div class="gallery" id="gallery"></div>
 
     <script>
+        // Image data organized by folder
         const imageData = {
-  "21-blue-energy-beam-convergence.jpg": [
-    "21-blue-energy-beam-convergence"
-  ],
-  "21-blue-fractal-light-background.jpg": [
-    "21-blue-fractal-light-background"
-  ],
-  "anime (2).jpg": [
-    "anime"
-  ],
-  "anime (3).jpeg": [
-    "anime"
-  ],
-  "anime (3).png": [
-    "anime"
-  ],
-  "anime (5).jpg": [
-    "anime"
-  ],
-  "anime (5).png": [
-    "anime"
-  ],
-  "anime (6).jpg": [
-    "anime"
-  ],
-  "anime (7).jpg": [
-    "anime"
-  ],
-  "anime, aesthetic, ethereal,  (1).jpeg": [
-    "anime",
-    "aesthetic",
-    "ethereal"
-  ],
-  "anime, aesthetic, ethereal,  (1).png": [
-    "anime",
-    "aesthetic",
-    "ethereal"
-  ],
-  "anime, aesthetic, ethereal,  (2).jpeg": [
-    "anime",
-    "aesthetic",
-    "ethereal"
-  ],
-  "anime, aesthetic, ethereal,  (2).png": [
-    "anime",
-    "aesthetic",
-    "ethereal"
-  ],
-  "anime, aesthetic, ethereal,  (3).png": [
-    "anime",
-    "aesthetic",
-    "ethereal"
-  ],
-  "anime, dark, (6).jpeg": [
-    "anime",
-    "dark"
-  ],
-  "anime, dark, aesthetic,  (1).jpeg": [
-    "anime",
-    "dark",
-    "aesthetic"
-  ],
-  "anime, dark, aesthetic,  (1).png": [
-    "anime",
-    "dark",
-    "aesthetic"
-  ],
-  "anime, dark, aesthetic,  (2).jpg": [
-    "anime",
-    "dark",
-    "aesthetic"
-  ],
-  "anime, dark, aesthetic,  (3).jpg": [
-    "anime",
-    "dark",
-    "aesthetic"
-  ],
-  "anime, dark, aesthetic,  (3).png": [
-    "anime",
-    "dark",
-    "aesthetic"
-  ],
-  "anime, dark, aesthetic,  (4).jpg": [
-    "anime",
-    "dark",
-    "aesthetic"
-  ],
-  "anime, dark, aesthetic,  (4).png": [
-    "anime",
-    "dark",
-    "aesthetic"
-  ],
-  "anime, dark, aesthetic,  (5).jpg": [
-    "anime",
-    "dark",
-    "aesthetic"
-  ],
-  "anime, dark, aesthetic,  (5).png": [
-    "anime",
-    "dark",
-    "aesthetic"
-  ],
-  "anime, dark, aesthetic, (8).png": [
-    "anime",
-    "dark",
-    "aesthetic"
-  ],
-  "anime, styled, toned down, (1).jpg": [
-    "anime",
-    "styled",
-    "toned down"
-  ],
-  "anime, styled, toned down, (3).jpg": [
-    "anime",
-    "styled",
-    "toned down"
-  ],
-  "anime, styled, toned down, (4).jpg": [
-    "anime",
-    "styled",
-    "toned down"
-  ],
-  "anime, styled, toned down, (5).jpg": [
-    "anime",
-    "styled",
-    "toned down"
-  ],
-  "anime, styled, toned down, (6).jpg": [
-    "anime",
-    "styled",
-    "toned down"
-  ],
-  "anime.jpeg": [
-    "anime"
-  ],
-  "anime.jpg": [
-    "anime"
-  ],
-  "anime.png": [
-    "anime"
-  ],
-  "black, dark, minimalistic, goth, (1).jpg": [
-    "black",
-    "dark",
-    "minimalistic",
-    "goth"
-  ],
-  "black, dark, minimalistic, goth, (2).jpg": [
-    "black",
-    "dark",
-    "minimalistic",
-    "goth"
-  ],
-  "black, dark, minimalistic, goth, (3).jpg": [
-    "black",
-    "dark",
-    "minimalistic",
-    "goth"
-  ],
-  "black, dark, minimalistic, goth, (4).jpg": [
-    "black",
-    "dark",
-    "minimalistic",
-    "goth"
-  ],
-  "black, dark, minimalistic, goth, (5).jpg": [
-    "black",
-    "dark",
-    "minimalistic",
-    "goth"
-  ],
-  "black, dark, minimalistic, goth, (6).jpg": [
-    "black",
-    "dark",
-    "minimalistic",
-    "goth"
-  ],
-  "black, dark, minimalistic, goth, (7).jpg": [
-    "black",
-    "dark",
-    "minimalistic",
-    "goth"
-  ],
-  "black, dark, minimalistic, goth, (8).jpg": [
-    "black",
-    "dark",
-    "minimalistic",
-    "goth"
-  ],
-  "black, dark, minimalistic, goth, (9).jpg": [
-    "black",
-    "dark",
-    "minimalistic",
-    "goth"
-  ],
-  "chaotic, soft, toned down,  (1).jpg": [
-    "chaotic",
-    "soft",
-    "toned down"
-  ],
-  "chaotic, soft, toned down,  (2).jpg": [
-    "chaotic",
-    "soft",
-    "toned down"
-  ],
-  "chaotic, soft, toned down,  (3).jpg": [
-    "chaotic",
-    "soft",
-    "toned down"
-  ],
-  "chaotic, soft, toned down,  (4).jpg": [
-    "chaotic",
-    "soft",
-    "toned down"
-  ],
-  "chaotic, soft, toned down,  (5).jpg": [
-    "chaotic",
-    "soft",
-    "toned down"
-  ],
-  "chaotic, soft, toned down,  (6).jpg": [
-    "chaotic",
-    "soft",
-    "toned down"
-  ],
-  "dark, .jpg": [
-    "dark"
-  ],
-  "dark, minimalistic, chaos (1).png": [
-    "dark",
-    "minimalistic",
-    "chaos"
-  ],
-  "dark, minimalistic, chaos (2).png": [
-    "dark",
-    "minimalistic",
-    "chaos"
-  ],
-  "dark, minimalistic, chaos (3).png": [
-    "dark",
-    "minimalistic",
-    "chaos"
-  ],
-  "dark, minimalistic, clean, .jpg": [
-    "dark",
-    "minimalistic",
-    "clean"
-  ],
-  "dreamy, aestethic, ethereal, floral, (1).jpg": [
-    "dreamy",
-    "aestethic",
-    "ethereal",
-    "floral"
-  ],
-  "dreamy, aestethic, ethereal, floral, (2).jpg": [
-    "dreamy",
-    "aestethic",
-    "ethereal",
-    "floral"
-  ],
-  "dreamy, aestethic, ethereal, floral, (3).jpg": [
-    "dreamy",
-    "aestethic",
-    "ethereal",
-    "floral"
-  ],
-  "dreamy, aestethic, ethereal, floral, (4).jpg": [
-    "dreamy",
-    "aestethic",
-    "ethereal",
-    "floral"
-  ],
-  "dreamy, aestethic, ethereal, floral, (5).jpg": [
-    "dreamy",
-    "aestethic",
-    "ethereal",
-    "floral"
-  ],
-  "dreamy, aestethic, ethereal, floral, (6).jpg": [
-    "dreamy",
-    "aestethic",
-    "ethereal",
-    "floral"
-  ],
-  "dreamy, aestethic, ethereal, floral, (7).jpg": [
-    "dreamy",
-    "aestethic",
-    "ethereal",
-    "floral"
-  ],
-  "dreamy, aestethic, ethereal, floral, (8).jpg": [
-    "dreamy",
-    "aestethic",
-    "ethereal",
-    "floral"
-  ],
-  "dreamy, floral, aesthetic, ethereal, soft, smooth, minimalism, (10).jpg": [
-    "dreamy",
-    "floral",
-    "aesthetic",
-    "ethereal",
-    "soft",
-    "smooth",
-    "minimalism"
-  ],
-  "dreamy, floral, aesthetic, ethereal, soft, smooth, minimalism, (11).jpg": [
-    "dreamy",
-    "floral",
-    "aesthetic",
-    "ethereal",
-    "soft",
-    "smooth",
-    "minimalism"
-  ],
-  "dreamy, floral, aesthetic, ethereal, soft, smooth, minimalism, (6).jpg": [
-    "dreamy",
-    "floral",
-    "aesthetic",
-    "ethereal",
-    "soft",
-    "smooth",
-    "minimalism"
-  ],
-  "dreamy, floral, aesthetic, ethereal, soft, smooth, minimalism, (7).jpg": [
-    "dreamy",
-    "floral",
-    "aesthetic",
-    "ethereal",
-    "soft",
-    "smooth",
-    "minimalism"
-  ],
-  "dreamy, floral, aesthetic, ethereal, soft, smooth, minimalism, (8).jpg": [
-    "dreamy",
-    "floral",
-    "aesthetic",
-    "ethereal",
-    "soft",
-    "smooth",
-    "minimalism"
-  ],
-  "dreamy, floral, aesthetic, ethereal, soft, smooth, minimalism, (9).jpg": [
-    "dreamy",
-    "floral",
-    "aesthetic",
-    "ethereal",
-    "soft",
-    "smooth",
-    "minimalism"
-  ],
-  "dreamy, soft tones, aesthetic,  (1).jpg": [
-    "dreamy",
-    "soft tones",
-    "aesthetic"
-  ],
-  "dreamy, soft tones, aesthetic,  (2).jpg": [
-    "dreamy",
-    "soft tones",
-    "aesthetic"
-  ],
-  "dreamy, soft tones, aesthetic,  (3).jpg": [
-    "dreamy",
-    "soft tones",
-    "aesthetic"
-  ],
-  "dreamy, soft tones, aesthetic,  (4).jpg": [
-    "dreamy",
-    "soft tones",
-    "aesthetic"
-  ],
-  "dreamy, soft tones, aesthetic,  (5).jpg": [
-    "dreamy",
-    "soft tones",
-    "aesthetic"
-  ],
-  "dreamy, soft tones, aesthetic,  (6).jpg": [
-    "dreamy",
-    "soft tones",
-    "aesthetic"
-  ],
-  "Dreamy_20Fabrica_20-_2010.jpeg": [
-    "dreamy_20fabrica_20-_2010"
-  ],
-  "fractal glass, gradient, soft, minimalism, clean,  (1).jpg": [
-    "fractal glass",
-    "gradient",
-    "soft",
-    "minimalism",
-    "clean"
-  ],
-  "fractal glass, gradient, soft, minimalism, clean,  (10).jpg": [
-    "fractal glass",
-    "gradient",
-    "soft",
-    "minimalism",
-    "clean"
-  ],
-  "fractal glass, gradient, soft, minimalism, clean,  (11).jpg": [
-    "fractal glass",
-    "gradient",
-    "soft",
-    "minimalism",
-    "clean"
-  ],
-  "fractal glass, gradient, soft, minimalism, clean,  (2).jpg": [
-    "fractal glass",
-    "gradient",
-    "soft",
-    "minimalism",
-    "clean"
-  ],
-  "fractal glass, gradient, soft, minimalism, clean,  (3).jpg": [
-    "fractal glass",
-    "gradient",
-    "soft",
-    "minimalism",
-    "clean"
-  ],
-  "fractal glass, gradient, soft, minimalism, clean,  (4).jpg": [
-    "fractal glass",
-    "gradient",
-    "soft",
-    "minimalism",
-    "clean"
-  ],
-  "fractal glass, gradient, soft, minimalism, clean,  (5).jpg": [
-    "fractal glass",
-    "gradient",
-    "soft",
-    "minimalism",
-    "clean"
-  ],
-  "fractal glass, gradient, soft, minimalism, clean,  (6).jpg": [
-    "fractal glass",
-    "gradient",
-    "soft",
-    "minimalism",
-    "clean"
-  ],
-  "fractal glass, gradient, soft, minimalism, clean,  (7).jpg": [
-    "fractal glass",
-    "gradient",
-    "soft",
-    "minimalism",
-    "clean"
-  ],
-  "fractal glass, gradient, soft, minimalism, clean,  (8).jpg": [
-    "fractal glass",
-    "gradient",
-    "soft",
-    "minimalism",
-    "clean"
-  ],
-  "fractal glass, gradient, soft, minimalism, clean,  (9).jpg": [
-    "fractal glass",
-    "gradient",
-    "soft",
-    "minimalism",
-    "clean"
-  ],
-  "fractal glass, gradient, soft, minimalism, clean, (10).jpg": [
-    "fractal glass",
-    "gradient",
-    "soft",
-    "minimalism",
-    "clean"
-  ],
-  "Galactic_20-_2028.png": [
-    "galactic_20-_2028"
-  ],
-  "gradient, chaotic, bright, (1).jpeg": [
-    "gradient",
-    "chaotic",
-    "bright"
-  ],
-  "gradient, chaotic, bright, (1).jpg": [
-    "gradient",
-    "chaotic",
-    "bright"
-  ],
-  "gradient, chaotic, bright, (2).jpg": [
-    "gradient",
-    "chaotic",
-    "bright"
-  ],
-  "gradient, chaotic, bright, (3).jpg": [
-    "gradient",
-    "chaotic",
-    "bright"
-  ],
-  "gradient, chaotic, bright, (4).jpg": [
-    "gradient",
-    "chaotic",
-    "bright"
-  ],
-  "gradient, pastel, white, iridescent,  (1).jpg": [
-    "gradient",
-    "pastel",
-    "white",
-    "iridescent"
-  ],
-  "gradient, pastel, white, iridescent,  (10).jpg": [
-    "gradient",
-    "pastel",
-    "white",
-    "iridescent"
-  ],
-  "gradient, pastel, white, iridescent,  (11).jpg": [
-    "gradient",
-    "pastel",
-    "white",
-    "iridescent"
-  ],
-  "gradient, pastel, white, iridescent,  (2).jpg": [
-    "gradient",
-    "pastel",
-    "white",
-    "iridescent"
-  ],
-  "gradient, pastel, white, iridescent,  (3).jpg": [
-    "gradient",
-    "pastel",
-    "white",
-    "iridescent"
-  ],
-  "gradient, pastel, white, iridescent,  (4).jpg": [
-    "gradient",
-    "pastel",
-    "white",
-    "iridescent"
-  ],
-  "gradient, pastel, white, iridescent,  (5).jpg": [
-    "gradient",
-    "pastel",
-    "white",
-    "iridescent"
-  ],
-  "gradient, pastel, white, iridescent,  (6).jpg": [
-    "gradient",
-    "pastel",
-    "white",
-    "iridescent"
-  ],
-  "gradient, pastel, white, iridescent,  (7).jpg": [
-    "gradient",
-    "pastel",
-    "white",
-    "iridescent"
-  ],
-  "gradient, pastel, white, iridescent,  (8).jpg": [
-    "gradient",
-    "pastel",
-    "white",
-    "iridescent"
-  ],
-  "gradient, pastel, white, iridescent,  (9).jpg": [
-    "gradient",
-    "pastel",
-    "white",
-    "iridescent"
-  ],
-  "gradient, pastel, white, iridescent, (12).jpg": [
-    "gradient",
-    "pastel",
-    "white",
-    "iridescent"
-  ],
-  "gradient, soft, minimalism, clean,  (1).jpg": [
-    "gradient",
-    "soft",
-    "minimalism",
-    "clean"
-  ],
-  "gradient, soft, minimalism, clean,  (10).jpg": [
-    "gradient",
-    "soft",
-    "minimalism",
-    "clean"
-  ],
-  "gradient, soft, minimalism, clean,  (13).jpg": [
-    "gradient",
-    "soft",
-    "minimalism",
-    "clean"
-  ],
-  "gradient, soft, minimalism, clean,  (2).jpg": [
-    "gradient",
-    "soft",
-    "minimalism",
-    "clean"
-  ],
-  "gradient, soft, minimalism, clean,  (2).png": [
-    "gradient",
-    "soft",
-    "minimalism",
-    "clean"
-  ],
-  "gradient, soft, minimalism, clean,  (3).jpg": [
-    "gradient",
-    "soft",
-    "minimalism",
-    "clean"
-  ],
-  "gradient, soft, minimalism, clean,  (3).png": [
-    "gradient",
-    "soft",
-    "minimalism",
-    "clean"
-  ],
-  "gradient, soft, minimalism, clean,  (4).jpg": [
-    "gradient",
-    "soft",
-    "minimalism",
-    "clean"
-  ],
-  "gradient, soft, minimalism, clean,  (4).png": [
-    "gradient",
-    "soft",
-    "minimalism",
-    "clean"
-  ],
-  "gradient, soft, minimalism, clean,  (5).jpg": [
-    "gradient",
-    "soft",
-    "minimalism",
-    "clean"
-  ],
-  "gradient, soft, minimalism, clean,  (5).png": [
-    "gradient",
-    "soft",
-    "minimalism",
-    "clean"
-  ],
-  "gradient, soft, minimalism, clean,  (6).jpg": [
-    "gradient",
-    "soft",
-    "minimalism",
-    "clean"
-  ],
-  "gradient, soft, minimalism, clean,  (7).jpg": [
-    "gradient",
-    "soft",
-    "minimalism",
-    "clean"
-  ],
-  "gradient, soft, minimalism, clean,  (7).png": [
-    "gradient",
-    "soft",
-    "minimalism",
-    "clean"
-  ],
-  "gradient, soft, minimalism, clean,  (8).jpg": [
-    "gradient",
-    "soft",
-    "minimalism",
-    "clean"
-  ],
-  "gradient, soft, minimalism, clean,  (8).png": [
-    "gradient",
-    "soft",
-    "minimalism",
-    "clean"
-  ],
-  "gradient, soft, minimalism, clean,  (9).jpg": [
-    "gradient",
-    "soft",
-    "minimalism",
-    "clean"
-  ],
-  "gradient, soft, minimalism, clean,  (9).png": [
-    "gradient",
-    "soft",
-    "minimalism",
-    "clean"
-  ],
-  "gradient, soft, minimalism, clean, .jpg": [
-    "gradient",
-    "soft",
-    "minimalism",
-    "clean"
-  ],
-  "iridescent, chaotic, shape,  (2).jpg": [
-    "iridescent",
-    "chaotic",
-    "shape"
-  ],
-  "iridescent, chaotic, shape,  (3).jpg": [
-    "iridescent",
-    "chaotic",
-    "shape"
-  ],
-  "iridescent, chaotic, shape,  (4).jpg": [
-    "iridescent",
-    "chaotic",
-    "shape"
-  ],
-  "iridescent, chaotic, shape, .jpg": [
-    "iridescent",
-    "chaotic",
-    "shape"
-  ],
-  "iridescent, clean, calm,  (1).jpg": [
-    "iridescent",
-    "clean",
-    "calm"
-  ],
-  "iridescent, clean, calm,  (10).jpg": [
-    "iridescent",
-    "clean",
-    "calm"
-  ],
-  "iridescent, clean, calm,  (2).jpg": [
-    "iridescent",
-    "clean",
-    "calm"
-  ],
-  "iridescent, clean, calm,  (3).jpg": [
-    "iridescent",
-    "clean",
-    "calm"
-  ],
-  "iridescent, clean, calm,  (4).jpg": [
-    "iridescent",
-    "clean",
-    "calm"
-  ],
-  "iridescent, clean, calm,  (5).jpg": [
-    "iridescent",
-    "clean",
-    "calm"
-  ],
-  "iridescent, clean, calm,  (6).jpg": [
-    "iridescent",
-    "clean",
-    "calm"
-  ],
-  "iridescent, clean, calm,  (7).jpg": [
-    "iridescent",
-    "clean",
-    "calm"
-  ],
-  "iridescent, clean, calm,  (8).jpg": [
-    "iridescent",
-    "clean",
-    "calm"
-  ],
-  "iridescent, clean, calm,  (9).jpg": [
-    "iridescent",
-    "clean",
-    "calm"
-  ],
-  "iridescent, clean, calm, .jpg": [
-    "iridescent",
-    "clean",
-    "calm"
-  ],
-  "purple, anime, styled, toned down, (2).jpg": [
-    "purple",
-    "anime",
-    "styled",
-    "toned down"
-  ],
-  "purple, anime, styled, toned down, (2).png": [
-    "purple",
-    "anime",
-    "styled",
-    "toned down"
-  ],
-  "purple, anime, styled, toned down, (5).jpg": [
-    "purple",
-    "anime",
-    "styled",
-    "toned down"
-  ],
-  "purple, anime, styled, toned down, (6).jpg": [
-    "purple",
-    "anime",
-    "styled",
-    "toned down"
-  ],
-  "purple, anime, styled, toned down, (7).jpg": [
-    "purple",
-    "anime",
-    "styled",
-    "toned down"
-  ],
-  "purple, styled, toned down, (2).jpg": [
-    "purple",
-    "styled",
-    "toned down"
-  ],
-  "purple, styled, toned down, (2).png": [
-    "purple",
-    "styled",
-    "toned down"
-  ],
-  "purple, styled, toned down, (3).png": [
-    "purple",
-    "styled",
-    "toned down"
-  ],
-  "shape, purple, anime, styled, toned down, (3).jpg": [
-    "shape",
-    "purple",
-    "anime",
-    "styled",
-    "toned down"
-  ],
-  "shape, purple, anime, styled, toned down, (4).jpeg": [
-    "shape",
-    "purple",
-    "anime",
-    "styled",
-    "toned down"
-  ],
-  "shape, purple, anime, styled, toned down, (4).jpg": [
-    "shape",
-    "purple",
-    "anime",
-    "styled",
-    "toned down"
-  ],
-  "shape, purple, anime, styled, toned down, (5).jpg": [
-    "shape",
-    "purple",
-    "anime",
-    "styled",
-    "toned down"
-  ],
-  "shape, smooth, minimalism, modern,  (1).jpeg": [
-    "shape",
-    "smooth",
-    "minimalism",
-    "modern"
-  ],
-  "shape, smooth, minimalism, modern,  (10).jpg": [
-    "shape",
-    "smooth",
-    "minimalism",
-    "modern"
-  ],
-  "shape, smooth, minimalism, modern,  (11).jpeg": [
-    "shape",
-    "smooth",
-    "minimalism",
-    "modern"
-  ],
-  "shape, smooth, minimalism, modern,  (11).jpg": [
-    "shape",
-    "smooth",
-    "minimalism",
-    "modern"
-  ],
-  "shape, smooth, minimalism, modern,  (12).jpeg": [
-    "shape",
-    "smooth",
-    "minimalism",
-    "modern"
-  ],
-  "shape, smooth, minimalism, modern,  (12).jpg": [
-    "shape",
-    "smooth",
-    "minimalism",
-    "modern"
-  ],
-  "shape, smooth, minimalism, modern,  (13).jpg": [
-    "shape",
-    "smooth",
-    "minimalism",
-    "modern"
-  ],
-  "shape, smooth, minimalism, modern,  (14).jpg": [
-    "shape",
-    "smooth",
-    "minimalism",
-    "modern"
-  ],
-  "shape, smooth, minimalism, modern,  (15).jpg": [
-    "shape",
-    "smooth",
-    "minimalism",
-    "modern"
-  ],
-  "shape, smooth, minimalism, modern,  (16).jpeg": [
-    "shape",
-    "smooth",
-    "minimalism",
-    "modern"
-  ],
-  "shape, smooth, minimalism, modern,  (4).jpeg": [
-    "shape",
-    "smooth",
-    "minimalism",
-    "modern"
-  ],
-  "shape, smooth, minimalism, modern,  (5).jpeg": [
-    "shape",
-    "smooth",
-    "minimalism",
-    "modern"
-  ],
-  "shape, smooth, minimalism, modern,  (6).jpeg": [
-    "shape",
-    "smooth",
-    "minimalism",
-    "modern"
-  ],
-  "shape, smooth, minimalism, modern,  (7).jpeg": [
-    "shape",
-    "smooth",
-    "minimalism",
-    "modern"
-  ],
-  "shape, smooth, minimalism, modern,  (8).jpeg": [
-    "shape",
-    "smooth",
-    "minimalism",
-    "modern"
-  ],
-  "shape, smooth, minimalism, modern,  (9).jpeg": [
-    "shape",
-    "smooth",
-    "minimalism",
-    "modern"
-  ],
-  "toned down, calm, ethereal, .jpg": [
-    "toned down",
-    "calm",
-    "ethereal"
-  ]
-};
-
-        // Category mapping - groups related tags
-        const categoryMap = {
-            'anime': ['anime'],
-            'dark': ['dark', 'black', 'goth'],
-            'minimal': ['minimalistic', 'clean', 'minimalism'],
-            'dreamy': ['dreamy', 'ethereal', 'aesthetic', 'aestethic', 'soft', 'calm', 'toned down', 'soft tones'],
-            'gradient': ['gradient', 'iridescent', 'fractal glass', 'pastel'],
-            'floral': ['floral'],
-            'chaotic': ['chaotic', 'chaos', 'bright'],
-            'shapes': ['shape', 'smooth', 'modern']
+            "abstract": [
+                "gradient, chaotic, bright, (1).jpeg",
+                "shape, purple, anime, styled, toned down, (3).jpg",
+                "shape, purple, anime, styled, toned down, (4).jpeg",
+                "shape, purple, anime, styled, toned down, (4).jpg",
+                "shape, purple, anime, styled, toned down, (5).jpg",
+                "shape, smooth, minimalism, modern,  (1).jpeg",
+                "shape, smooth, minimalism, modern,  (10).jpg",
+                "shape, smooth, minimalism, modern,  (11).jpeg",
+                "shape, smooth, minimalism, modern,  (11).jpg",
+                "shape, smooth, minimalism, modern,  (12).jpeg",
+                "shape, smooth, minimalism, modern,  (12).jpg",
+                "shape, smooth, minimalism, modern,  (13).jpg",
+                "shape, smooth, minimalism, modern,  (14).jpg",
+                "shape, smooth, minimalism, modern,  (16).jpeg",
+                "shape, smooth, minimalism, modern,  (4).jpeg",
+                "shape, smooth, minimalism, modern,  (5).jpeg",
+                "shape, smooth, minimalism, modern,  (6).jpeg",
+                "shape, smooth, minimalism, modern,  (7).jpeg",
+                "shape, smooth, minimalism, modern,  (8).jpeg",
+                "shape, smooth, minimalism, modern,  (9).jpeg",
+                "toned down, calm, ethereal, .jpg"
+            ],
+            "anime": [
+                "anime (1).jpeg",
+                "anime (1).jpg",
+                "anime (1).png",
+                "anime (11).png",
+                "anime (12).jpg",
+                "anime (12).png",
+                "anime (13).jpg",
+                "anime (14).jpg",
+                "anime (15).jpg",
+                "anime (16).jpg",
+                "anime (17).jpg",
+                "anime (2).jpeg",
+                "anime (2).jpg",
+                "anime (2).png",
+                "anime (3).jpeg",
+                "anime (3).jpg",
+                "anime (3).png",
+                "anime (4).jpg",
+                "anime (4).png",
+                "anime (5).jpeg",
+                "anime (5).png",
+                "anime (6).jpeg",
+                "anime (6).jpg",
+                "anime (6).png",
+                "anime (7).jpeg",
+                "anime (7).png",
+                "anime (8).jpg",
+                "anime (8).png",
+                "anime (9).png",
+                "purple, anime, styled, toned down, (2).jpg",
+                "purple, anime, styled, toned down, (2).png",
+                "purple, anime, styled, toned down, (5).jpg",
+                "purple, anime, styled, toned down, (6).jpg"
+            ],
+            "artsy": [
+                "dreamy, soft tones, aesthetic,  (1).jpg",
+                "dreamy, soft tones, aesthetic,  (2).jpg",
+                "dreamy, soft tones, aesthetic,  (3).jpg",
+                "dreamy, soft tones, aesthetic,  (4).jpg",
+                "dreamy, soft tones, aesthetic,  (5).jpg",
+                "dreamy, soft tones, aesthetic,  (6).jpg"
+            ],
+            "floral": [
+                "floral (1).jpg",
+                "floral (10).jpg",
+                "floral (11).jpg",
+                "floral (12).jpg",
+                "floral (13).jpg",
+                "floral (14).jpg",
+                "floral (2).jpg",
+                "floral (3).jpg",
+                "floral (4).jpg",
+                "floral (5).jpg",
+                "floral (6).jpg",
+                "floral (7).jpg",
+                "floral (8).jpg",
+                "floral (9).jpg"
+            ],
+            "fractal glass": [
+                "fractal glass, gradient, soft, minimalism, clean,  (1).jpg",
+                "fractal glass, gradient, soft, minimalism, clean,  (10).jpg",
+                "fractal glass, gradient, soft, minimalism, clean,  (11).jpg",
+                "fractal glass, gradient, soft, minimalism, clean,  (2).jpg",
+                "fractal glass, gradient, soft, minimalism, clean,  (3).jpg",
+                "fractal glass, gradient, soft, minimalism, clean,  (4).jpg",
+                "fractal glass, gradient, soft, minimalism, clean,  (5).jpg",
+                "fractal glass, gradient, soft, minimalism, clean,  (6).jpg",
+                "fractal glass, gradient, soft, minimalism, clean,  (7).jpg",
+                "fractal glass, gradient, soft, minimalism, clean,  (8).jpg",
+                "fractal glass, gradient, soft, minimalism, clean,  (9).jpg",
+                "fractal glass, gradient, soft, minimalism, clean, (10).jpg"
+            ],
+            "gradients": [
+                "gradient (1).jpg",
+                "gradient (1).png",
+                "gradient (10).jpg",
+                "gradient (11).jpg",
+                "gradient (12).jpg",
+                "gradient (2).jpg",
+                "gradient (2).png",
+                "gradient (3).jpg",
+                "gradient (3).png",
+                "gradient (4).jpg",
+                "gradient (4).png",
+                "gradient (5).jpg",
+                "gradient (5).png",
+                "gradient (6).jpg",
+                "gradient (6).png",
+                "gradient (7).jpg",
+                "gradient (7).png",
+                "gradient (8).jpg",
+                "gradient (9).jpg",
+                "purple, styled, toned down, (2).jpg",
+                "purple, styled, toned down, (2).png",
+                "purple, styled, toned down, (3).png"
+            ],
+            "iridescent": [
+                "iridescent, clean, calm,  (1).jpg",
+                "iridescent, clean, calm,  (10).jpg",
+                "iridescent, clean, calm,  (2).jpg",
+                "iridescent, clean, calm,  (3).jpg",
+                "iridescent, clean, calm,  (4).jpg",
+                "iridescent, clean, calm,  (5).jpg",
+                "iridescent, clean, calm,  (6).jpg",
+                "iridescent, clean, calm,  (7).jpg",
+                "iridescent, clean, calm,  (8).jpg",
+                "iridescent, clean, calm,  (9).jpg",
+                "iridescent, clean, calm, .jpg"
+            ],
+            "pastel": [
+                "gradient, pastel, white, iridescent,  (1).jpg",
+                "gradient, pastel, white, iridescent,  (10).jpg",
+                "gradient, pastel, white, iridescent,  (11).jpg",
+                "gradient, pastel, white, iridescent,  (2).jpg",
+                "gradient, pastel, white, iridescent,  (3).jpg",
+                "gradient, pastel, white, iridescent,  (4).jpg",
+                "gradient, pastel, white, iridescent,  (5).jpg",
+                "gradient, pastel, white, iridescent,  (6).jpg",
+                "gradient, pastel, white, iridescent,  (7).jpg",
+                "gradient, pastel, white, iridescent,  (8).jpg",
+                "gradient, pastel, white, iridescent,  (9).jpg",
+                "gradient, pastel, white, iridescent, (12).jpg"
+            ],
+            "phone": [
+                "phone (1).jpg",
+                "phone (2).jpg",
+                "phone (3).jpg",
+                "phone (4).jpg",
+                "phone (5).jpg",
+                "phone (6).jpg",
+                "phone (7).jpg",
+                "phone (8).jpg",
+                "phone (9).jpg"
+            ],
+            "other": [
+                "anime (5).jpg",
+                "anime (9).jpg",
+                "dark, .jpg",
+                "dark, minimalistic, chaos (1).png",
+                "dark, minimalistic, chaos (2).png",
+                "dark, minimalistic, chaos (3).png",
+                "dark, minimalistic, clean, .jpg",
+                "purple, anime, styled, toned down, (7).jpg",
+                "shape, smooth, minimalism, modern,  (15).jpg"
+            ]
         };
 
         const baseUrl = "Images/";
@@ -1173,28 +402,42 @@
         const countDisplay = document.getElementById('count');
         
         let currentFilter = 'all';
-        let allImages = Object.keys(imageData);
+        let allImages = [];
         let loadedCount = 0;
-        const BATCH_SIZE = 30; // Load 30 images at a time
+        const BATCH_SIZE = 30;
+
+        // Build flat list of all images with their paths
+        function buildImageList() {
+            const images = [];
+            for (const [category, files] of Object.entries(imageData)) {
+                files.forEach(file => {
+                    const path = category === 'other' ? file : `${category}/${file}`;
+                    images.push({ path, category, filename: file });
+                });
+            }
+            return images;
+        }
+
+        // Initialize
+        allImages = buildImageList();
 
         // Create gallery item element
-        function createGalleryItem(image) {
-            const imageUrl = baseUrl + image;
+        function createGalleryItem(imageObj) {
+            const imageUrl = baseUrl + imageObj.path;
             
             const item = document.createElement('div');
             item.className = 'gallery-item';
-            item.dataset.tags = imageData[image].join(',');
+            item.dataset.category = imageObj.category;
             
             const skeleton = document.createElement('div');
             skeleton.className = 'skeleton';
             
             const img = document.createElement('img');
             img.src = imageUrl;
-            img.alt = image.replace(/\.[^/.]+$/, "").replace(/-|_/g, " ");
+            img.alt = imageObj.filename.replace(/\.[^/.]+$/, "").replace(/-|_/g, " ");
             img.loading = 'lazy';
             img.onclick = () => window.open(imageUrl, '_blank');
             
-            // Handle image load
             img.onload = function() {
                 this.classList.add('loaded');
             };
@@ -1220,7 +463,6 @@
             
             updateCount();
             
-            // If all images loaded, disconnect observer
             if (loadedCount >= allImages.length) {
                 observer.disconnect();
             }
@@ -1235,7 +477,7 @@
                 loadNextBatch();
             }
         }, {
-            rootMargin: '500px' // Start loading 500px before reaching bottom
+            rootMargin: '500px'
         });
 
         // Initial load
@@ -1243,14 +485,13 @@
         gallery.appendChild(sentinel);
         observer.observe(sentinel);
 
-
         // Update count
         function updateCount() {
+            const totalImages = buildImageList().length;
             const visible = document.querySelectorAll('.gallery-item:not(.hidden)').length;
-            const total = Object.keys(imageData).length;
             countDisplay.textContent = currentFilter === 'all' 
-                ? `${total} wallpapers` 
-                : `${visible} of ${total} wallpapers`;
+                ? `${totalImages} wallpapers` 
+                : `${visible} of ${totalImages} wallpapers`;
         }
 
         // Filter functionality
@@ -1260,13 +501,9 @@
             
             // Filter the images array
             if (category === 'all') {
-                allImages = Object.keys(imageData);
+                allImages = buildImageList();
             } else {
-                const categoryTags = categoryMap[category] || [];
-                allImages = Object.keys(imageData).filter(image => {
-                    const tags = imageData[image];
-                    return tags.some(tag => categoryTags.includes(tag.trim()));
-                });
+                allImages = buildImageList().filter(img => img.category === category);
             }
             
             // Clear gallery and reload
